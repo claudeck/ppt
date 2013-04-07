@@ -113,3 +113,25 @@ pre .tex .formula {
   opacity: 0.5;
 }
 
+ul.inline-list-logo {
+  list-style: none !important;
+  display: block;
+}
+
+ul.inline-list-logo li {
+  float: left;
+  clear: none;
+  width: 230px;
+  padding-bottom: 20px;
+}
+
+ul.inline-list-logo li small {
+  line-height: 42px;
+}
+
+ul.inline-list-logo img {
+  vertical-align: text-top;
+  border: 2px solid #fff;
+  width: 175px;
+  height: 150px;
+}
