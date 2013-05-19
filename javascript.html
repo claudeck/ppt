@@ -18,7 +18,11 @@
     <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
     <!-- For syntax highlighting -->
+    <!--
     <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/github.css">
+  -->
+    <link rel="stylesheet" href="lib/css/xcode.css">
 
     <!-- If the query includes 'print-pdf', use the PDF print sheet -->
     <script>
@@ -48,7 +52,7 @@
         <section>
           <h2>Outlines</h2>
           <ul>
-            <li>Javascript History</li>
+            <li>My Javascript Exp</li>
             <li>The Important parts</li>
             <li>Debugging</li>
             <li>Modular</li>
@@ -58,126 +62,275 @@
         <!-- Example of nested vertical slides -->
         <section>
           <section>
-            <h2>Javascript History</h2>
+            <h2>My Javascript Exp</h2>
             <ul>
-              <li>语言的发展</li>
-              <li>类库的发展</li>
-              <li>浏览器的发展</li>
-              <li>应用范围</li>
+              <li>IE6 age</li>
+              <li>Ajax</li>
+              <li>ExtJS/jQuery</li>
+              <li>NodeJS</li>
+              <li>Modular</li>
+              <li>HTML5</li>
+            </ul>
+          </section>
+        </section>
+        
+        <section>
+            <h2>IE6时代</h2>
+            <ul>
+              <li>DHTML(DOM/HTML/CSS/JS)</li>
+            </ul>
+            <pre><code contenteditable class="javascript">
+    // depot/castro/wwwroot/ehealthinsurance/js/EHI_JavaScript.js
+    function hide_confirm(){
+      // use document.getElementById
+      // use dom navigate api directly
+      document.getElementById('_shield')
+          .parentNode.removeChild(document.getElementById('_shield'));
+      document.getElementById('_confirm')
+          .parentNode.removeChild(document.getElementById('_confirm'));
+      var button = document.getElementById('mcei.html.button.clicked:BidMethodCancel');
+      if(button!=null)
+        button.click();
+    }
+            </code></pre>
+            <pre><code contenteditable class="html">
+  &lt;!-- event binding --&gt;
+  &lt;body onLoad="quickPopup.init();resetWaitMsg();" onUnload="resetPageVariables()"&gt;
+            </code></pre>
+        </section>
+        
+        <section>
+          <section>
+            <h2>Ajax</h2>
+            <ul>
+              <li>Asynchronous(event,message) - XMLHttpRequest exchanging data</li>
+              <li>JavaScript - Language</li>
+              <li>XML - Data Format</li>
             </ul>
           </section>
           <section>
-            <h2>根据语言的发展</h2>
-            <ul>
-              <li>Netscape Javascript</li>
-              <li>Miscrosoft JScript</li>
-              <li>ECMAScript 5</li>
-              <li>ECMAScript 6</li>
-            </ul>
+            <h2>Sample</h2>
+            <pre><code contenteditable class="javascript">
+    // depot/castro/wwwroot/ehealthinsurance/js/replayController.js
+function loadXMLDoc(url,callback) {
+  var req = false;
+    // branch for native XMLHttpRequest object
+    if(window.XMLHttpRequest) {
+      try {
+      req = new XMLHttpRequest();
+        } catch(e) {
+      req = false;
+        }
+    // branch for IE/Windows ActiveX version
+    } else if(window.ActiveXObject) {
+        try {
+          req = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch(e) {
+          try {
+              req = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch(e) {
+              req = false;
+          }
+    }
+    }
+  if(req) {
+    req.onreadystatechange = function() {
+      if (req.readyState == 4) {
+        // only if "OK"
+        if (req.status == 200) {
+          callback(req);
+        } else {
+          alert("There was a problem retrieving the XML data:\n" +
+            req.statusText);
+        }
+          
+      }
+    };
+    req.open("GET", url, true);
+    req.send("");
+  }
+}
+            </code></pre>
           </section>
           <section>
-            <h2>根据类库的发展</h2>
+            <h2>Data Format</h2>
             <ul>
-              <li>Prototype/Script.aculo.us</li>
-              <li>jQuery/Mootools</li>
-              <li>YUI/Ext.js</li>
-              <li>Backbone/Angular</li>
+              <li>HTML Segment/Plain Text</li>
+              <li>XML</li>
+              <li>JSON</li>
             </ul>
           </section>
+        </section>
 
+        <section>
           <section>
-            <h2>根据浏览器的发展</h2>
+            <h2>PrototypeJS/ExtJS/jQuery</h2>
+              <ul>
+                <li>Rise of JS Components</li>
+                <li>PrototypeJS</li>
+                <li>ExtJS</li>
+                <li>jQuery</li>
+              </ul>
+          </section>
+          <section>
+            <h2>ExtJS</h2>
+              <ul>
+                <li>Fat Client/Single Page Application</li>
+                <li>Object-oriented</li>
+              </ul>
+          </section>
+          <section>
+            <h2>jQuery</h2>
+              <ul>
+                <li>Selector/DOM/Events/Ajax</li>
+                <li>plug-ins</li>
+                <li>Method chaining</li>
+              </ul>
+          </section>
+          <section>
+            <h2>jQuery Sample</h2>
+            <pre><code contenteditable class="javascript">
+// depot/castro/wwwroot/ehealthinsurance/js/provider.js
+function getInfo(ipid,isSmallMap, callback){
+  var data = Base64.decode(PROVIDERS[ipid]);
+  
+  // This is a shit!
+  if (isIE()){
+    var xml = data;
+    data = new ActiveXObject("Microsoft.XMLDOM");
+      data.async = false;
+      data.loadXML(xml);
+  }
+  
+  var params = {
+    m: 'detail',
+    key: $('#gkey').val(),
+    msize : isSmallMap ? '300x120' : '550x400',
+    mzoom : 14,
+    lat : $(data).find('latitude').text(),
+    lng : $(data).find('longitude').text()
+  };
+  
+  $.get('/ehi/ProviderAjaxService.ajax', params, function(xml, status){
+    callback(data,$(xml).find('staticmapurl').text());
+  },'xml');
+}
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>NodeJS</h2>
+              <ul>
+                <li>Node.js is a platform built on <font color="yellow">Chrome's JavaScript runtime</font> for easily building fast, scalable network applications. Node.js uses an <font color="yellow">event-driven</font>, <font color="yellow">non-blocking I/O</font> model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</li>
+              </ul>
+          </section>
+          <section>
+            <h2>HTTP Server</h2>
+            <pre><code contenteditable class="javascript">
+var http = require('http');
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
+console.log('Server running at http://127.0.0.1:1337/');
+            </code></pre>
+            <pre><code contenteditable class="bash">
+% node example.js
+Server running at http://127.0.0.1:1337/
+            </code></pre>
+          </section>
+          <section>
+            <h2>TCP Server</h2>
+            <pre><code contenteditable class="javascript">
+var net = require('net');
+
+var server = net.createServer(function (socket) {
+  socket.write('Echo server\r\n');
+  socket.pipe(socket);
+});
+
+server.listen(1337, '127.0.0.1');
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <h2>Modular</h2>
             <ul>
-              <li>IE6/ JScript</li>
-              <li>Firefox/ Monkey</li>
-              <li>Chrome/ V8</li>
+              <li>MVC - Backbone.js</li>
+              <li>AMD - Request.js</li>
             </ul>
-          </section>
-
-          <section>
-            <h2>应用范围</h2>
-            <ul class="inline-list-logo">
-              <li>
-                <small>Browser</small>
-                <img alt="校验/特效/Ajax/SPA"/>
-              </li>
-              <li>
-                <small>Server Side</small>
-                <img alt="node.js"/>
-              </li>
-              <li>
-                <small>Browser Plugins</small>
-                <img alt="Chrome extension"/>
-              </li>
-              <li>
-                <small>Desktop</small>
-                <img alt="appjs/node-webkit"/>
-              </li>
-              <li>
-                <small>Mobile</small>
-                <img alt="HTML5/phonegap"/>
-              </li>
-              <li>
-                <small>Realtime</small>
-                <img alt="socket.io/metror"/>
-              </li>
-              <li>
-                <small>jsVM</small>
-                <img alt="CoffeeScript/Dart/windjs"/>
-              </li>
-              <li>
-                <small>Emulator</small>
-                <img alt="Linux/GB"/>
-              </li>
+        </section>
+        <section>
+          <h2>HTML5</h2>
+            <ul>
+              <li>HTML Tags</li>
+              <li>Application Cache</li>
+              <li>Media Queries</li>
+              <li>Canvas</li>
+              <li>WebSocket</li>
+              <li>CSS3 Transform</li>
             </ul>
-          </section>
-
         </section>
 
         <section>
           <h2>The Important parts</h2>
             <ul>
               <li>Scope</li>
-              <li>原型继承链/面向对象</li>
+              <li>Prototype Chain/Object-Oriented</li>
               <li>Context this</li>
-              <li>函数式编程和Closure</li>
-              <li>异步编程</li>
-              <li>严格模式</li>
+              <li>Functional programming &amp; Closure</li>
+              <li>Asynchronous Programming</li>
+              <li>use strict</li>
             </ul>
         </section>
 
         <section>
           <section>
-            <h2>变量作用域</h2>
+            <h2>Scope</h2>
               <ul>
-                <li>全局作用域</li>
-                <li>函数作用域</li>
-                <li>作用域和代码组织</li>
+                <li>Function Scope</li>
+                <li>Global</li>
+                <li>Anonymous Function</li>
+                <li>Scope &amp; Namespaces</li>
               </ul>
           </section>
           <section>
-            <h2>全局作用域</h2>
+            <h2>Function Scope</h2>
               <ul>
-                <li>Global window</li>
+                <li>Hoisting</li>
+                <li>Function Scope</li>
               </ul>
+              <pre><code contenteditable class="javascript">
+bar();
+var bar = function() {};
+var someValue = 42;
+
+test();
+function test(data) {
+    if (false) {
+        goo = 1;
+
+    } else {
+        var goo = 2;
+    }
+    for(var i = 0; i < 100; i++) {
+        var e = data[i];
+    }
+}
+              </code></pre>
           </section>
           <section>
-            <h2>函数作用域</h2>
+            <h2>Global</h2>
               <ul>
-                <li>局部作用域的变量高于全局作用域</li>
-                <li>没有块级作用域，变量提升</li>
-              </ul>
-          </section>
-          <section>
-            <h2>作用域和代码组织</h2>
-              <ul>
-                <li>使用匿名函数避免污染全局作用域</li>
-                <li>模块化开发，模拟命名空间</li>
+                <li>Browser - window object</li>
+                <li>NodeJS - global object</li>
               </ul>
           </section>
 
           <section>
-            <h2>匿名函数</h2>
+            <h2>Anonymous Function</h2>
             <pre><code contenteditable class="javascript">
               ;(function($){
                 var x = 0;
@@ -189,44 +342,86 @@
           </section>
 
           <section>
-            <h2>命名空间</h2>
-            <pre><code contenteditable class="javascript">
-              var myApp =  myApp || {};
-   
-              myApp.routers = myApp.routers || {};
-              myApp.model = myApp.model || {};
-              myApp.model.special = myApp.model.special || {};
+            <h2>Scope &amp; Namespaces</h2>
+              <ul>
+                <li>使用匿名函数避免污染全局作用域</li>
+                <li>模块化开发，模拟命名空间</li>
+              </ul>
+              <pre><code contenteditable class="javascript">
+(function() {
+    // a self contained "namespace"
+    windows.myApp = {};
+
+    myApp.routers = myApp.routers || {};
+    myApp.model = myApp.model || {};
+    myApp.model.special = myApp.model.special || {};
+
+})(); // execute the function immediately
+              </code></pre>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Prototype Chain/Object-Oriented</h2>
+          </section>
+          <section>
+            <h2>Object-Oriented</h2>
+            <pre><code contenteditable class="javascript" id="this_1">
+function Foo() {
+    this.value = 42;
+}
+Foo.prototype = {
+    method: function() {}
+};
+
+            </code></pre>
+          </section>
+          <section>
+            <h2>prototypal inheritance</h2>
+            <pre><code contenteditable class="javascript" id="this_1">
+function Foo() {
+    this.value = 42;
+}
+Foo.prototype = {
+    method: function() {}
+};
+
+function Bar() {}
+
+// Set Bar's prototype to a new instance of Foo
+Bar.prototype = new Foo();
+Bar.prototype.foo = 'Hello World';
+
+// Make sure to list Bar as the actual constructor
+Bar.prototype.constructor = Bar;
+
+var test = new Bar(); // create a new bar instance
+
+// The resulting prototype chain
+test [instance of Bar]
+    Bar.prototype [instance of Foo]
+        { foo: 'Hello World' }
+        Foo.prototype
+            { method: ... }
+            Object.prototype
+                { toString: ... /* etc. */ }
             </code></pre>
           </section>
         </section>
-
         <section>
           <section>
-            <h2>面向对象/原型继承链</h2>
-          </section>
-          <section>
-            <h2>面向对象</h2>
-          </section>
-          <section>
-            <h2>继承</h2>
-          </section>
-          <section>
-            <h2>原型继承链</h2>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>this关键字</h2>
+            <h2>this keyword</h2>
               <ul>
-                <li>纯粹的函数调用</li>
-                <li>作为对象方法的调用</li>
-                <li>作为构造函数调用</li>
-                <li>apply调用</li>
+                <li>Function call</li>
+                <li>Use as Object method</li>
+                <li>Use as Object constructor</li>
+                <li>apply/call</li>
               </ul>
           </section>
           <section>
-            <h2>纯粹的函数调用</h2>
+            <h2>Function call</h2>
             <pre><code contenteditable class="javascript" id="this_1">
               var x = 1;
               debugger;
@@ -236,10 +431,10 @@
               test();
               alert(x); //0
             </code></pre>
-            <button jsrun="this_1">运行</button>
+            <button jsrun="this_1">Run it</button>
           </section>
           <section>
-            <h2>作为对象方法的调用</h2>
+            <h2>Use as Object method</h2>
             <pre><code contenteditable class="javascript" id="this_2">
               function test(){
                 alert(this.x);
@@ -249,19 +444,40 @@
               o.m = test;
               o.m();
             </code></pre>
-            <button jsrun="this_2">运行</button>
+            <button jsrun="this_2">Run it</button>
           </section>
           <section>
-            <h2>作为构造函数调用</h2>
+            <h2>Use as Object constructor</h2>
             <pre><code contenteditable class="javascript" id="this_3">
+              function Bar(x){
+                this.x = x;
+              }
+
+              Bar.prototype.hello = function(){
+                alert('hello,' + this.x);
+              };
+
+              var foo = new Bar('claude');
+              foo.hello();
             </code></pre>
-            <button jsrun="this_3">运行</button>
+            <button jsrun="this_3">Run it</button>
           </section>
           <section>
-            <h2>apply调用</h2>
+            <h2>apply/call</h2>
+            <ul>
+              <li>Duck Type</li>
+              <li>Polymorphic</li>
+            </ul>
             <pre><code contenteditable class="javascript" id="this_4">
+              function foo(a, b, c) {
+                alert(a + b + c);
+              }
+
+              var bar = {};
+              foo.apply(bar, [1, 2, 3]); // array will expand to the below
+              foo.call(bar, 1, 2, 3); // results in a = 1, b = 2, c = 3
             </code></pre>
-            <button jsrun="this_4">运行</button>
+            <button jsrun="this_4">Run it</button>
           </section>
         </section>
 
@@ -294,7 +510,7 @@
               o.m = test;
               o.m();
             </code></pre>
-            <button jsrun="debugger">运行</button>
+            <button jsrun="debugger">Run it</button>
           </section>
           <section>
             <h2>console.log</h2>
@@ -308,7 +524,7 @@
               o.m = test;
               o.m();
             </code></pre>
-            <button jsrun="console">运行</button>
+            <button jsrun="console">Run it</button>
           </section>
         </section>
 
