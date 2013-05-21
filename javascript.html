@@ -279,7 +279,7 @@ server.listen(1337, '127.0.0.1');
             <ul>
               <li>Scope</li>
               <li>Prototype Chain/Object-Oriented</li>
-              <li>Context this</li>
+              <li>this keyword</li>
               <li>Functional programming &amp; Closure</li>
               <li>Asynchronous Programming</li>
               <li>use strict</li>
@@ -303,21 +303,15 @@ server.listen(1337, '127.0.0.1');
                 <li>Function Scope</li>
               </ul>
               <pre><code contenteditable class="javascript">
-bar();
+bar();  // works
 var bar = function() {};
 var someValue = 42;
 
-test();
-function test(data) {
-    if (false) {
-        goo = 1;
-
-    } else {
-        var goo = 2;
+function test() { // a scope
+    for(var i = 0; i < 10; i++) { // not a scope
+        // count
     }
-    for(var i = 0; i < 100; i++) {
-        var e = data[i];
-    }
+    console.log(i); // 10
 }
               </code></pre>
           </section>
@@ -376,7 +370,14 @@ Foo.prototype = {
     method: function() {}
 };
 
+var obj = {};
             </code></pre>
+
+          <aside class="notes">
+            JavaScript的对象可以作为哈希表使用。
+            通过{}可以创建一个对象
+            被创建的函数指向构造函数的Prototype
+          </aside>
           </section>
           <section>
             <h2>prototypal inheritance</h2>
@@ -408,6 +409,10 @@ test [instance of Bar]
             Object.prototype
                 { toString: ... /* etc. */ }
             </code></pre>
+          <aside class="notes">
+            当查找一个对象的属性时，JavaScript 会向上遍历原型链，直到找到给定名称的属性为止。
+            到查找到达原型链的顶部 - 也就是 Object.prototype - 但是仍然没有找到指定的属性，就会返回 undefined
+          </aside>
           </section>
         </section>
         <section>
@@ -432,6 +437,9 @@ test [instance of Bar]
               alert(x); //0
             </code></pre>
             <button jsrun="this_1">Run it</button>
+          <aside class="notes">
+            this 指向global
+          </aside>
           </section>
           <section>
             <h2>Use as Object method</h2>
@@ -443,8 +451,20 @@ test [instance of Bar]
               o.x = 1;
               o.m = test;
               o.m();
+
+              // use that
+              Foo.method = function() {
+                // var that = this;
+                function test() {
+                  // Use that instead of this here
+                }
+                test();
+              }
             </code></pre>
             <button jsrun="this_2">Run it</button>
+          <aside class="notes">
+            this 指向对象
+          </aside>
           </section>
           <section>
             <h2>Use as Object constructor</h2>
@@ -461,6 +481,9 @@ test [instance of Bar]
               foo.hello();
             </code></pre>
             <button jsrun="this_3">Run it</button>
+          <aside class="notes">
+            this 指向新创建的对象
+          </aside>
           </section>
           <section>
             <h2>apply/call</h2>
@@ -478,9 +501,118 @@ test [instance of Bar]
               foo.call(bar, 1, 2, 3); // results in a = 1, b = 2, c = 3
             </code></pre>
             <button jsrun="this_4">Run it</button>
+          <aside class="notes">
+            this 显式的指向函数调用的第一个对象
+          </aside>
           </section>
         </section>
 
+        <section>
+          <section>
+            <h2>Functional programming &amp; Closure</h2>
+              <ul>
+                <li>Functional programming</li>
+                <li>Closure</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Functional programming</h2>
+              <ul>
+                <li>函数为first class</li>
+                <li>函数作为参数</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Closure</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+function Counter(start) {
+    var count = start;
+    return {
+        increment: function() {
+            count++;
+        },
+
+        get: function() {
+            return count;
+        }
+    }
+}
+
+var foo = Counter(4);
+foo.increment();
+foo.get(); // 5
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+            <aside class="notes">
+              当前作用域总能访问外部作用域的变量
+            </aside>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Asynchronous Programming</h2>
+              <ul>
+                <li>Callback Function</li>
+                <li>Observer Pattern|Event|Pub/Sub</li>
+                <li>Promises</li>
+                <li>Wind.js</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Callback Function</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+$.ajax({
+  url: "test.html",
+  context: document.body,
+  success: function(data){
+    $(this).addClass("done");
+  }
+});
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+          </section>
+
+          <section>
+            <h2>Observer Pattern|Event|Pub/Sub</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+$.bind('ajaxSuccess', function(e, data){
+  alert(data);
+});
+
+$.ajax({
+  url: "test.html",
+  context: document.body,
+  success: function(data){
+    $.trigger('ajaxSuccess', [data]);
+  }
+});
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+          </section>
+
+          <section>
+            <h2>Promises/jQuery defer</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+$.ajax({
+  url: "test.html",
+  context: document.body
+}).done(function() {
+  $(this).addClass("done");
+});
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+          </section>
+
+          <section>
+            <h2>Wind.js</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+var val = $await($.ajax({url: 'text.html'}));
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+          </section>
+
+        </section>
         <section>
           <section>
             <h2>Debugging</h2>
