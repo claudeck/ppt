@@ -66,7 +66,7 @@
             <ul>
               <li>IE6 age</li>
               <li>Ajax</li>
-              <li>ExtJS/jQuery</li>
+              <li>Rise of JS Components</li>
               <li>NodeJS</li>
               <li>Modular</li>
               <li>HTML5</li>
@@ -103,13 +103,13 @@
           <section>
             <h2>Ajax</h2>
             <ul>
-              <li>Asynchronous(event,message) - XMLHttpRequest exchanging data</li>
+              <li>Asynchronous - XMLHttpRequest exchanging data</li>
               <li>JavaScript - Language</li>
               <li>XML - Data Format</li>
             </ul>
           </section>
           <section>
-            <h2>Sample</h2>
+            <h2>XMLHttpRequest</h2>
             <pre><code contenteditable class="javascript">
     // depot/castro/wwwroot/ehealthinsurance/js/replayController.js
 function loadXMLDoc(url,callback) {
@@ -153,6 +153,12 @@ function loadXMLDoc(url,callback) {
             </code></pre>
           </section>
           <section>
+            <h2>jQuery ajax</h2>
+            <pre><code contenteditable class="javascript">
+//TODO add sample from castro
+            </code></pre>
+          </section>
+          <section>
             <h2>Data Format</h2>
             <ul>
               <li>HTML Segment/Plain Text</li>
@@ -164,32 +170,34 @@ function loadXMLDoc(url,callback) {
 
         <section>
           <section>
-            <h2>PrototypeJS/ExtJS/jQuery</h2>
+            <h2>Rise of JS Components</h2>
               <ul>
-                <li>Rise of JS Components</li>
                 <li>PrototypeJS</li>
                 <li>ExtJS</li>
                 <li>jQuery</li>
               </ul>
           </section>
           <section>
-            <h2>ExtJS</h2>
+            <h2>ExtJS(Sencha)</h2>
               <ul>
                 <li>Fat Client/Single Page Application</li>
                 <li>Object-oriented</li>
               </ul>
+              <a class="test" href="#">
+                <img width="400" height="300" src="img/sencha.png" alt="Unicorn">
+              </a>
           </section>
           <section>
             <h2>jQuery</h2>
               <ul>
                 <li>Selector/DOM/Events/Ajax</li>
                 <li>plug-ins</li>
-                <li>Method chaining</li>
               </ul>
           </section>
           <section>
             <h2>jQuery Sample</h2>
             <pre><code contenteditable class="javascript">
+              //TODO add a better sample
 // depot/castro/wwwroot/ehealthinsurance/js/provider.js
 function getInfo(ipid,isSmallMap, callback){
   var data = Base64.decode(PROVIDERS[ipid]);
@@ -258,9 +266,14 @@ server.listen(1337, '127.0.0.1');
         <section>
           <h2>Modular</h2>
             <ul>
-              <li>MVC - Backbone.js</li>
-              <li>AMD - Request.js</li>
+              <li>MVC/MVP/MVVM</li>
+              <li>AMD/CMD</li>
             </ul>
+            <p></p>
+            <a class="test" href="#">
+              <!--TODO add appdesinger capture.-->
+              <img width="400" height="300" src="img/sencha.png" alt="Unicorn">
+            </a>
         </section>
         <section>
           <h2>HTML5</h2>
@@ -279,10 +292,9 @@ server.listen(1337, '127.0.0.1');
             <ul>
               <li>Scope</li>
               <li>Prototype Chain/Object-Oriented</li>
-              <li>this keyword</li>
               <li>Functional programming &amp; Closure</li>
+              <li>this keyword</li>
               <li>Asynchronous Programming</li>
-              <li>use strict</li>
             </ul>
         </section>
 
@@ -316,22 +328,40 @@ function test() { // a scope
               </code></pre>
           </section>
           <section>
+            <h2>Function Scope 2</h2>
+              <p>single var pattern</p>
+              <pre><code contenteditable class="javascript">
+function updateElement() {
+  var el = document.getElementById("result"),
+      style = el.style;
+  // do something with el and style...
+}
+              </code></pre>
+          </section>
+          <section>
             <h2>Global</h2>
               <ul>
                 <li>Browser - window object</li>
-                <li>NodeJS - global object</li>
               </ul>
+              <pre><code contenteditable class="javascript">
+myglobal = "hello"; // antipattern
+console.log(myglobal); // "hello"
+console.log(window.myglobal); // "hello"
+console.log(window["myglobal"]); // "hello"
+console.log(this.myglobal); // "hello"
+              </code></pre>
           </section>
 
           <section>
             <h2>Anonymous Function</h2>
+            <p>anonymous wrapper</p>
             <pre><code contenteditable class="javascript">
               ;(function($){
                 var x = 0;
                 function test(){
                   return 1+1;
                 }
-              })(jQuery, undefined);
+              })(jQuery);
             </code></pre>
           </section>
 
@@ -362,7 +392,7 @@ function test() { // a scope
           </section>
           <section>
             <h2>Object-Oriented</h2>
-            <pre><code contenteditable class="javascript" id="this_1">
+            <pre><code contenteditable class="javascript" >
 function Foo() {
     this.value = 42;
 }
@@ -381,7 +411,7 @@ var obj = {};
           </section>
           <section>
             <h2>prototypal inheritance</h2>
-            <pre><code contenteditable class="javascript" id="this_1">
+            <pre><code contenteditable class="javascript">
 function Foo() {
     this.value = 42;
 }
@@ -415,6 +445,69 @@ test [instance of Bar]
           </aside>
           </section>
         </section>
+
+        <section>
+          <section>
+            <h2>Functional programming &amp; Closure</h2>
+              <ul>
+                <li>Functional programming</li>
+                <li>Closure</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Functional programming</h2>
+              <pre><code contenteditable class="javascript">
+//First class
+var func = function(a){console.log(a)};
+
+//Functions as object
+func.apply(window, [1]);
+
+//Function as variable
+var myarray=[25, 8, 7, 41]
+myarray.sort(function(a,b){return a - b}) //Array now becomes [7, 8, 25, 41]
+
+//Function as return value
+var setup = function () {
+  console.log(1);
+  return function () {
+    console.log(2);
+  };
+};
+// using the setup function
+var my = setup(); // alerts 1
+my(); // alerts 2
+              </code></pre>
+          </section>
+          <section>
+            <h2>Closure</h2>
+            <pre><code contenteditable class="javascript" id="this_4">
+function Counter(start) {
+    var count = start;
+    return {
+        increment: function() {
+            count++;
+        },
+
+        get: function() {
+            return count;
+        }
+    }
+}
+
+var foo = Counter(4);
+foo.increment();
+foo.get(); // 5
+            </code></pre>
+            <button jsrun="this_4">Run it</button>
+            <aside class="notes">
+              当前作用域总能访问外部作用域的变量
+              模拟私有变量
+              读取函数内部的变量
+            </aside>
+          </section>
+        </section>
+
         <section>
           <section>
             <h2>this keyword</h2>
@@ -504,48 +597,6 @@ test [instance of Bar]
           <aside class="notes">
             this 显式的指向函数调用的第一个对象
           </aside>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2>Functional programming &amp; Closure</h2>
-              <ul>
-                <li>Functional programming</li>
-                <li>Closure</li>
-              </ul>
-          </section>
-          <section>
-            <h2>Functional programming</h2>
-              <ul>
-                <li>函数为first class</li>
-                <li>函数作为参数</li>
-              </ul>
-          </section>
-          <section>
-            <h2>Closure</h2>
-            <pre><code contenteditable class="javascript" id="this_4">
-function Counter(start) {
-    var count = start;
-    return {
-        increment: function() {
-            count++;
-        },
-
-        get: function() {
-            return count;
-        }
-    }
-}
-
-var foo = Counter(4);
-foo.increment();
-foo.get(); // 5
-            </code></pre>
-            <button jsrun="this_4">Run it</button>
-            <aside class="notes">
-              当前作用域总能访问外部作用域的变量
-            </aside>
           </section>
         </section>
 
@@ -662,7 +713,7 @@ var val = $await($.ajax({url: 'text.html'}));
 
         <section>
           <section>
-            <h2>模块化开发</h2>
+            <h2>Modular Development</h2>
             <p>AMD</p>
             <p>MVC</p>
           </section>
@@ -682,9 +733,12 @@ var val = $await($.ajax({url: 'text.html'}));
         <section>
           <h1>The Future of Javascript</h1>
           <ul>
-            <li>ECMAScript 6</li>
-            <li>Dart</li>
-            <li>TypeScript</li>
+            <li>ECMAScript</li>
+            <li>jsVM CoffeeScript/Dart/TypeScript</li>
+            <li>HTML5</li>
+            <li>Server Side</li>
+            <li>Desktop</li>
+            <li>Other Emulator/Linux</li>
           </ul>
         </section>
 
