@@ -155,7 +155,20 @@ function loadXMLDoc(url,callback) {
           <section>
             <h2>jQuery ajax</h2>
             <pre><code contenteditable class="javascript">
-//TODO add sample from castro
+////depot/castro/jsproot/ui-service/provider-search/provider-search.js
+function removeProvider(clientId, uid, providerListLimit, searchResultId) { 
+  var action = "removeProvider";
+  var parameters = "clientId=" + clientId + "&providerIdAndAddressId=" + uid;
+  var providerListElement = document.getElementById("provider-list");
+    $.ajax({
+      url: "provider-search-list-refresh!" + action, 
+      data: parameters,
+      type: 'POST',
+        success: function(response) {callbackRefreshProviderList(response, providerListElement, searchResultId);},
+        error: handleAjaxError
+    });
+    
+}
             </code></pre>
           </section>
           <section>
@@ -197,32 +210,20 @@ function loadXMLDoc(url,callback) {
           <section>
             <h2>jQuery Sample</h2>
             <pre><code contenteditable class="javascript">
-              //TODO add a better sample
-// depot/castro/wwwroot/ehealthinsurance/js/provider.js
-function getInfo(ipid,isSmallMap, callback){
-  var data = Base64.decode(PROVIDERS[ipid]);
-  
-  // This is a shit!
-  if (isIE()){
-    var xml = data;
-    data = new ActiveXObject("Microsoft.XMLDOM");
-      data.async = false;
-      data.loadXML(xml);
+// //depot/castro/wwwroot/ehealthinsurance/js/shopByAllPlans.js
+$(document).ready(function(){ 
+  var filterClickHandler = function(event) {
+    var shopByForm = $("form[name='shop-by']")
+    if(shopByForm.length > 0){
+      shopByForm.submit();
+    }
   }
   
-  var params = {
-    m: 'detail',
-    key: $('#gkey').val(),
-    msize : isSmallMap ? '300x120' : '550x400',
-    mzoom : 14,
-    lat : $(data).find('latitude').text(),
-    lng : $(data).find('longitude').text()
-  };
-  
-  $.get('/ehi/ProviderAjaxService.ajax', params, function(xml, status){
-    callback(data,$(xml).find('staticmapurl').text());
-  },'xml');
-}
+  $("#refine-search input.benefithotspot").hide(); // for js-enabled, hide the clear layers
+  $("#anyCompanyLayer").show();
+  $("#refine-search input:radio").click(filterClickHandler);
+  $("#refine-search input:checkbox").click(filterClickHandler);
+});
             </code></pre>
           </section>
         </section>
@@ -271,8 +272,7 @@ server.listen(1337, '127.0.0.1');
             </ul>
             <p></p>
             <a class="test" href="#">
-              <!--TODO add appdesinger capture.-->
-              <img width="400" height="300" src="img/sencha.png" alt="Unicorn">
+              <img width="600" height="400" src="img/wad.png" alt="Unicorn">
             </a>
         </section>
         <section>
@@ -367,10 +367,6 @@ console.log(this.myglobal); // "hello"
 
           <section>
             <h2>Scope &amp; Namespaces</h2>
-              <ul>
-                <li>使用匿名函数避免污染全局作用域</li>
-                <li>模块化开发，模拟命名空间</li>
-              </ul>
               <pre><code contenteditable class="javascript">
 (function() {
     // a self contained "namespace"
@@ -382,8 +378,11 @@ console.log(this.myglobal); // "hello"
 
 })(); // execute the function immediately
               </code></pre>
+          <aside class="notes">
+            使用匿名函数避免污染全局作用域
+            模块化开发，模拟命名空间
+          </aside>
           </section>
-
         </section>
 
         <section>
