@@ -503,6 +503,39 @@ function Counter(start) {
 var foo = Counter(4);
 foo.increment();
 foo.get(); // 5
+
+// depot/castro/wwwroot/ehealthinsurance/assets/js/quote/v1/quote.tip.popup.js
+loadData: function(e){
+  // if the ajax data exist in the cookie.
+  var that = this;
+  $.ajax({
+    url: this.$el.attr('href'),
+    beforeSend: function() {
+      //TODO...
+    },
+    success: function(data) {
+      // add the exist ajax data to the old one.
+      that.$el.data('data', data);
+      $("#ehi-tip-popup").find("div.ehi-tip-popup-content").html(data);
+      // set position of the popup
+      if(that.tipPos == 'auto'){
+                  that.setTipPosition(options, that.$el);
+              }else{
+                  that.setTipPosition(options, that.$el.parents(that.tipPos));
+              }
+    },
+    error: function() {
+      //TODO...
+    },
+    statusCode: {
+      // if 404...
+      404: function() {
+        // set default text.
+        $('#ehi-tip-popup').html('page not found');
+      }
+    }
+  });
+},
             </code></pre>
             <button jsrun="this_4">Run it</button>
             <aside class="notes">
@@ -526,13 +559,20 @@ foo.get(); // 5
           <section>
             <h2>Function call</h2>
             <pre><code contenteditable class="javascript" id="this_1">
-              var x = 1;
-              debugger;
-              function test(){
-                this.x = 0;
-              }
-              test();
-              alert(x); //0
+// depot/castro/wwwroot/ehealthinsurance/js/ehiTPIExitPopupChecker.js
+function hasExited() {
+    realParent = window.opener;
+  var cookieVal = getCookie(cookieName);
+    if (cookieVal != null && cookieVal.toLowerCase() == "t") {
+    if ( this.document.domain != realParent.document.domain )
+    { // Trap the error. If the parent and child domains differ then
+        // an error will be generated on attempting to read the parent value.
+    }
+    setTimeout ("hasExited();", 10 );
+  } else {
+      window.close();
+  }
+}
             </code></pre>
             <button jsrun="this_1">Run it</button>
           <aside class="notes">
@@ -542,22 +582,31 @@ foo.get(); // 5
           <section>
             <h2>Use as Object method</h2>
             <pre><code contenteditable class="javascript" id="this_2">
-              function test(){
-                alert(this.x);
-              }
-              var o = {};
-              o.x = 1;
-              o.m = test;
-              o.m();
+// depot/castro/wwwroot/ehealthinsurance/js/provider_v3.js
+function PageMasker(){}
 
-              // use that
-              Foo.method = function() {
-                // var that = this;
-                function test() {
-                  // Use that instead of this here
-                }
-                test();
-              }
+PageMasker.prototype.show = function(){
+    $('body').append('&lt;div class="pageMasker" style="background-color: #ffffff;position:absolute;z-index: 99999;top: 0;left: 0;"&gt;&lt;div class="loadingImage" style="position:relative;float:left;"&gt;&lt;img alt="loading" src="/ehealthinsurance/images_new/loadinfo.gif"/&gt;&lt;/div&gt;&lt;/div&gt;');
+    this.$el = $('.pageMasker');
+    this.$el.height($(document).height())
+             .width($(document).width())
+             .css('opacity', '0.5');
+    this.$el.find('.loadingImage').css({
+      left: ($(window).width() - this.$el.find('.loadingImage img').width()) / 2,
+       top: ($(window).height() - this.$el.find('.loadingImage img').height()) / 2
+    });
+};
+
+PageMasker.prototype.hide = function(){
+    this.$el.remove()
+}
+
+$(document).ready(function(){
+    $('form').submit(function(){
+        var masker = new PageMasker();
+        masker.show();
+    })
+});
             </code></pre>
             <button jsrun="this_2">Run it</button>
           <aside class="notes">
@@ -565,7 +614,7 @@ foo.get(); // 5
           </aside>
           </section>
           <section>
-            <h2>Use as Object constructor</h2>
+            <h2>Use in Object constructor</h2>
             <pre><code contenteditable class="javascript" id="this_3">
               function Bar(x){
                 this.x = x;
@@ -585,10 +634,6 @@ foo.get(); // 5
           </section>
           <section>
             <h2>apply/call</h2>
-            <ul>
-              <li>Duck Type</li>
-              <li>Polymorphic</li>
-            </ul>
             <pre><code contenteditable class="javascript" id="this_4">
               function foo(a, b, c) {
                 alert(a + b + c);
@@ -597,6 +642,19 @@ foo.get(); // 5
               var bar = {};
               foo.apply(bar, [1, 2, 3]); // array will expand to the below
               foo.call(bar, 1, 2, 3); // results in a = 1, b = 2, c = 3
+
+              // create function with special context.
+              function hoo(context){
+                return function(data){
+                  foo.apply(context, [data]);
+                }
+              };
+
+              $.ajax({
+                url: 'data.json',
+                dataType: 'json',
+                success: hoo(context)
+              })
             </code></pre>
             <button jsrun="this_4">Run it</button>
           <aside class="notes">
@@ -630,7 +688,7 @@ $.ajax({
           </section>
 
           <section>
-            <h2>Observer Pattern|Event|Pub/Sub</h2>
+            <h2>Observer Pattern(Listener|Pub/Sub)</h2>
             <pre><code contenteditable class="javascript" id="this_4">
 $.bind('ajaxSuccess', function(e, data){
   alert(data);
@@ -650,12 +708,36 @@ $.ajax({
           <section>
             <h2>Promises/jQuery deferred</h2>
             <pre><code contenteditable class="javascript" id="this_4">
+// new jQuery ajax api
 $.ajax({
   url: "test.html",
   context: document.body
 }).done(function() {
   $(this).addClass("done");
 });
+
+//without deferred
+$.get("/token", params, function (data) {
+  $.get("/order/last", params2, function(data) {
+    $.delete("/order", params3, function(data) {
+      $("#some_div").text("OK");
+    });
+  });
+});
+
+//with deferred
+$.get("/token", params)
+  .pipe(function(data){
+     // Note that here "this" refers to the
+     // jqXHR, which also is a deferred
+     return $.get("/order/last", params);
+  })
+  .pipe(function(data){
+    return $.delete("/order", params);
+  })
+  .pipe(function(data){
+    $("#some_div").text("OK");
+  });
             </code></pre>
             <button jsrun="this_4">Run it</button>
           </section>
