@@ -54,6 +54,7 @@
             <li>Cool Stuff</li>
             <li>History</li>
             <li>Hello World</li>
+            <li>Tools</li>
           </ul>
         </section>
 
@@ -62,7 +63,7 @@
             <h2>Cool Stuff</h2>
             <ul>
               <li>Young</li>
-              <li>Cool</li>
+              <li>Geek</li>
               <li>Innovation</li>
             </ul>
           </section>
@@ -186,11 +187,23 @@
           <section>
             <h2>Hello World</h2>
               <pre><code contenteditable class="javascript">
+//sync
+var fs = require('fs');
 
+var data = fs.readFileSync('text.txt', {encoding: 'UTF-8'});
+console.log(data);
+
+//async
+var fs = require('fs');
+
+fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
+    if(err) throw err;
+    console.log(data);
+});
               </code></pre>
           </section>
           <section>
-            <h2>Hello World2</h2>
+            <h2>Hello Node.JS</h2>
             <ul>
               <li>V8</li>
               <li>Event-driven</li>
@@ -199,8 +212,32 @@
             </ul>
           </section>
           <section>
+            <h2>Why non-blocking I/O</h2>
+            <a href="http://www.nearinfinity.com/blogs/jeff_kunkle/nodejs_basics_explained.html">
+              <img width="600" height="500" src="img/latency-bar-graph.png" alt="Unicorn">
+            </a>
+          </section>
+          <section>
+            <h2>CommonJS</h2>
+            <ul>
+              <li>Binary</li>
+              <li>FileSystem</li>
+              <li>Socket</li>
+              <li>Subprocess</li>
+              <li>Assert</li>
+            </ul>
+          </section>
+          <section>
             <h2>Http Server</h2>
               <pre><code contenteditable class="javascript">
+var http = require('http');
+
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('Hello world\n');
+}).listen(8888);
+
+console.log("Server running at http://localhost:8888/");
 
               </code></pre>
           </section>
@@ -216,7 +253,18 @@
           <section>
             <h2>Connect middleware</h2>
               <pre><code contenteditable class="javascript">
+var connect = require("connect"),
+    http = require("http"),
+    app = connect();
 
+app.use(connect.logger());
+
+app.use(function(req, res){
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end("Hello World!\n");
+});
+
+http.createServer(app).listen(8888);
               </code></pre>
           </section>
           <section>
@@ -229,9 +277,25 @@
           </section>
           <section>
             <h2>Socket.io</h2>
+            <p>
+              Socket.IO aims to make realtime apps possible in every browser and mobile device, blurring the differences between the different transport mechanisms. It's care-free realtime 100% in JavaScript.
+            </p>
           </section>
         </section>
 
+        <section>
+          <section>
+            <h2>Tools</h2>
+            <ul>
+              <li>WebStorm</li>
+              <li>Mocha</li>
+              <li>Grunt</li>
+              <li>Node-inspector</li>
+              <li>Cluster/Forever</li>
+              <li>Linux shell</li>
+            </ul>
+          </section>
+        </section>
       </div>
 
     </div>
