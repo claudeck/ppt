@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>8卦NodeJS</title>
+    <title>Introduction to Node.js</title>
 
     <meta name="description" content="How to study Javascript">
     <meta name="author" content="Claude Jiang">
@@ -42,7 +42,7 @@
       <div class="slides">
 
         <section>
-          <h1>8卦 Node.JS</h1>
+          <h1>Introduction to Node.js</h1>
           <p>
             <small>Speaker : <a href="http://www.claudejiang.com">Claude Jiang</a></small>
           </p>
@@ -133,24 +133,25 @@
             </ul>
           </section>
           <section>
-            <h2>Cloud Computing</h2>
-            <ul>
-              <li>Joyent</li>
-              <li>PaaS</li>
-            </ul>
-          </section>
-          <section>
             <h2>Ryan Dahl</h2>
             <ul>
               <li>Node.JS之父</li>
+              <li>2009年开发node.js</li>
               <li>2012年将node.js的管理权转给Isaac</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Joyent</h2>
+            <ul>
+              <li>Cloud Computing</li>
+              <li>PaaS</li>
             </ul>
           </section>
           <section>
             <h2>Isaac Z. Schlueter</h2>
             <ul>
-              <li>Node Package Manager(NPM)</li>
-              <li>Node.JS二代目</li>
+              <li>Node Package Manager(NPM)主要开发者</li>
+              <li>Node.JS现任领导者</li>
             </ul>
           </section>
           <section>
@@ -206,8 +207,9 @@ fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
             <h2>Hello Node.JS</h2>
             <ul>
               <li>V8</li>
+              <li>Non-blocking I/O</li>
+              <li>Asynchronous</li>
               <li>Event-driven</li>
-              <li>Libuv</li>
               <li>CommonJS</li>
             </ul>
           </section>
@@ -216,6 +218,14 @@ fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
             <a href="http://www.nearinfinity.com/blogs/jeff_kunkle/nodejs_basics_explained.html">
               <img width="600" height="500" src="img/latency-bar-graph.png" alt="Unicorn">
             </a>
+          </section>
+          <section>
+            <h2>Event-driven</h2>
+            <ul>
+              <li>Asynchronous</li>
+              <li>EventEmitter</li>
+              <li>Libev/Libeio/Libuv</li>
+            </ul>
           </section>
           <section>
             <h2>CommonJS</h2>
