@@ -55,13 +55,37 @@
             <li>Node Web development</li>
             <li>Who use Node</li>
           </ul>
+          <aside class="notes">
+            简单的介绍今天的议题，主要讲第一个，后面两个简单介绍。
+          </aside>
         </section>
 
         <section>
           <section>
             <h2>What's Node</h2>
             <p>Node.js is a platform built on <a href="#">Chrome's JavaScript runtime</a> for easily building fast, scalable network applications. Node.js uses an <a href="#">event-driven</a>, <a href="#">non-blocking I/O</a> model that makes it lightweight and efficient, perfect for <a href="#">data-intensive real-time applications</a> that run across distributed devices.</p>
+          <aside class="notes">
+            这个是官网给出来的定义。
+            可能很多人对于这个定义出现的这个名词都不熟悉。我们这次培训主要的目的就是讲清楚这些东西。我会先从一些你们熟悉的东西慢慢把你们带入node的世界。
+          </aside>
           </section>
+
+          <section>
+            <h2>Node VS Java platform</h2>
+            <ul>
+              <li>Language</li>
+              <li>Platform</li>
+              <li>Frameworks &amp; Tools</li>
+            </ul>
+          <aside class="notes">
+            Node并不是简单的运行于服务器端的JS。
+            JS在其被发明的初段就已经有用于服务器端Livewire。Rhino.
+            语言方面：Java使用的是java language,Node使用的是JS。Java运行于Jvm虚拟机，node运行于v8 js引擎。
+            平台方面：Java运行于Java平台。而node本身称得上平台。
+            框架和工具：struts。express。grunt,ant,maven.
+          </aside>
+          </section>
+
           <section>
             <blockquote>Talk is cheap. Show me the code. <br/>- Linus Torvalds</blockquote>
           </section>
@@ -80,31 +104,44 @@ console.log("Hello Node.js".rainbow);
                 <li class="fragment">NPM</li>
               </ul>
               <aside class="notes">
+                先跑一下例子。
+                我们从这个例子中可以了解到。
+                1.以前JS是跑在浏览器的，没有io,模块管理等机制。node在v8和commonjs之上把这些机制建立起来。
+                2.第一句用于引入colors模块，该模块的功能是使用控制台的一些转义字符输出带颜色的文字
+                3.模块机制不像namespace有命名的限制，你可以对你引入的模块任意取名。
+                4.第二句话用于将字符串打印出来，console.log在浏览器上也有存在，在node中它等同于输出到标准输出上。
                 https://github.com/marak/colors.js/
               </aside>
           </section>
           <section>
             <h2>Hello, Asynchronous I/O Programming</h2>
-              <pre><code contenteditable class="javascript">var fs = require('fs');
+            <pre class="fragment"><code contenteditable class="javascript">$.ajax({
+  url: 'http://www.claudejiang.com/echo',
+  data: {param1: 'claude'},
+  success: function(data){
+    ...
+  }
+});</code></pre>
+              <pre class="fragment"><code contenteditable class="javascript">var fs = require('fs');
 
 fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
     if(err) throw err;
     console.log(data);
 });
 console.log('end.');</code></pre>
-              <pre><code contenteditable class="javascript">$.ajax({
-  url: 'http://www.claudejiang.com/echo',
-  data: {param1: 'claude'},
-  success: function(data){
-    ...
-  }
-  });</code></pre>
+              
               <ul>
                 <li class="fragment">Asynchronous I/O APIs</li>
                 <li class="fragment">Asynchronous Programming</li>
                 <li class="fragment">Node style callback</li>
               </ul>
-              <aside class="notes"></aside>
+              <aside class="notes">
+                1.第一段代码是我们经常在网页上看到的ajax请求，浏览器端的javascript天生对异步友好，像ajax请求使用回调的方式，browser上的dom的事件回调以及最新的jquery的ajax使用promise重写，这些都是异步编程在浏览器端的应用。
+                2.接下来演示一个异步IO的例子。非阻塞IO是Node的核心。node的绝大部分api都是用来处理IO和网络的，通过灵活应用可以生产出各种应用。
+                3.fs模块的sync和async api
+                4.sio和aio的区别。
+                5.function(err, data)。node风格的回调处理。异常处理是node异步编程的难点之一。
+              </aside>
           </section>
           <section>
             <h2>Hello, Buffer/Stream/Event Emitter</h2>
@@ -126,7 +163,12 @@ rs.on('end', function(){
                 <li class="fragment">Buffer</li>
                 <li class="fragment">Stream/pipe</li>
               </ul>
-              <aside class="notes"></aside>
+              <aside class="notes">
+                第一个例子使用回调来处理异步，这个例子使用了事件来处理异步。
+                在对Stream的操作中，我们一般会处理到data, end, error三个事件。
+                而data如果没有指定字符编码的话，会返回Buffer对象。Buffer是Node用于二进制处理的对象。(1.Node的内存管理，2.Buffer和ECMAScript中的ArrayBuffer).
+                Linux符合JS哲学，Linux的哲学中，一切都是文件，让每一个程序成为过滤器。（Stream.pipe, connect.use）每一个程序之做好一件事情(npm);
+              </aside>
           </section>
           <section>
             <h2>Hello, TCP Programming</h2>
@@ -146,6 +188,10 @@ server.listen(7000, "localhost");
 
 console.log("TCP server listening on port 7000 at localhost.");
               </code></pre>
+              <aside class="notes">
+              演示例子。把客户端的信息原样返回。
+              在Node中开发tcp/udp应用是非常简单的。socket是一个双工流对象。只要了解流怎么应用，就可以很简单的开发一些网络应用。
+              </aside>
           </section>
           <section>
             <h2>Hello, Web Programming</h2>
@@ -159,9 +205,14 @@ http.createServer(function (req, res) {
 
 console.log('Server running at http://127.0.0.1:1337/');
               </code></pre>
+              <aside class="notes">
+              在Node中开发web应用也是件简单的事。
+              Node并不是一个Web框架，它是一个平台，可以使用它提供的http模块很简单的开发出一个http server。
+              Http模块是建立在net模块之上的，只是在其上对keep-alive做了一些封装，其他request,response对象都只是简单的对输入流和输出流进行了封装。
+              </aside>
           </section>
           <section>
-            <h2>Hello, Socket.io Programming</h2>
+            <h2>Hello DIRTy, Socket.io Programming</h2>
               <pre><code contenteditable class="javascript">
 var io = require('socket.io').listen(80);
 
@@ -186,6 +237,10 @@ io.sockets.on('connection', function (socket) {
                 <li class="fragment">data-intensive real-time applications</li>
                 <li class="fragment">chat/communication/stream/mongodb/proxy</li>
               </ul>
+              <aside class="notes">
+              Node最适合的应用场景介绍
+              进一步演示一些node in action中简单的chat应用。
+              </aside>
           </section>
         </section>
 
@@ -297,11 +352,19 @@ fs.readdir('.', function(err, files){
 
         <section>
           <section>
+            <h2>NPM</h2>
+            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+              <img width="500" height="500" src="node/npm_download.jpg" alt="Unicorn">
+            </a>
+          </section>
+        </section>
+
+        <section>
+          <section>
             <h2>Node.js Web Development</h2>
             <ul>
               <li>Web Development History</li>
               <li>Full stack JS Web Dev</li>
-              <li>Node VS Java platform</li>
             </ul>
           </section>
         </section>
@@ -367,17 +430,6 @@ fs.readdir('.', function(err, files){
 
         <section>
           <section>
-            <h2>Node VS Java platform</h2>
-            <ul>
-              <li>Language</li>
-              <li>Platform</li>
-              <li>Frameworks &amp; Tools</li>
-            </ul>
-          </section>
-        </section>
-        
-        <section>
-          <section>
             <h2>Who use Node</h2>
             <ul>
               <li>Linkedin</li>
@@ -388,6 +440,14 @@ fs.readdir('.', function(err, files){
               <li>Taobao</li>
               <li>...</li>
             </ul>
+          </section>
+        </section>
+        
+        <section>
+          <section>
+            <h2>Thank you</h2>
+            <blockquote>I hear and I forget. I see and I remember. I do and I understand.</blockquote>
+            <blockquote>不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之；学至于行之而止矣。- 荀子《儒效篇》</blockquote>
           </section>
         </section>
         
