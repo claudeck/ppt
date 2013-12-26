@@ -63,18 +63,22 @@
             <p>Node.js is a platform built on <a href="#">Chrome's JavaScript runtime</a> for easily building fast, scalable network applications. Node.js uses an <a href="#">event-driven</a>, <a href="#">non-blocking I/O</a> model that makes it lightweight and efficient, perfect for <a href="#">data-intensive real-time applications</a> that run across distributed devices.</p>
           </section>
           <section>
-            <h2>Start here</h2>
-            <blockquote>Talk is cheap. Show me the code <br/>- Linus Torvalds</blockquote>
+            <blockquote>Talk is cheap. Show me the code. <br/>- Linus Torvalds</blockquote>
           </section>
           <section>
             <h2>Hello, Server side javascript</h2>
               <pre><code contenteditable class="javascript">
-//load the third-part module colors.
+//load third party module 'colors'.
 var colors = require('colors');
 
 //print out 'Hello Node.js' with colorized.
 console.log("Hello Node.js".rainbow);
               </code></pre>
+              <ul>
+                <li class="fragment">Chrome Javascript runtime - V8</li>
+                <li class="fragment">API for server side</li>
+                <li class="fragment">NPM</li>
+              </ul>
               <aside class="notes">
                 https://github.com/marak/colors.js/
               </aside>
@@ -82,7 +86,8 @@ console.log("Hello Node.js".rainbow);
           <section>
             <h2>Hello, Asynchronous I/O Programming</h2>
               <pre><code contenteditable class="javascript">
-var fs = require('fs'); //import native module 'fs'.
+//load native module 'fs'.
+var fs = require('fs');
 
 fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
     if(err) throw err;
@@ -90,12 +95,39 @@ fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
 });
 console.log('end.');
               </code></pre>
+              <ul>
+                <li class="fragment">Asynchronous I/O APIs</li>
+                <li class="fragment">Asynchronous Programming</li>
+                <li class="fragment">Node style callback</li>
+              </ul>
+              <aside class="notes"></aside>
+          </section>
+          <section>
+            <h2>Hello, Buffer/Stream/Event Emitter</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
+
+var rs = fs.createReadStream(__filename);
+rs.on('data', function(data){
+  // console.log(data);
+  console.log(data.toString());
+});
+rs.on('end', function(){
+  console.log('end');
+});
+// rs.pipe(process.stdout);
+              </code></pre>
+              <ul>
+                <li class="fragment">Use Event(Sub/Pub) for Async IO</li>
+                <li class="fragment">Buffer</li>
+                <li class="fragment">Stream/pipe</li>
+              </ul>
               <aside class="notes"></aside>
           </section>
           <section>
             <h2>Hello, TCP Programming</h2>
               <pre><code contenteditable class="javascript">
-// load net native module
+// load net module
 var net = require('net');
 
 // create a tcp server
@@ -105,10 +137,9 @@ var server = net.createServer(function (socket) {
   });
 });
 
-// Fire up the server bound to port 7000 on localhost
+// bind to port 7000 on localhost
 server.listen(7000, "localhost");
 
-// Put a friendly message on the terminal
 console.log("TCP server listening on port 7000 at localhost.");
               </code></pre>
           </section>
@@ -116,10 +147,12 @@ console.log("TCP server listening on port 7000 at localhost.");
             <h2>Hello, Web Programming</h2>
               <pre><code contenteditable class="javascript">
 var http = require('http');
+
 http.createServer(function (req, res) {
   res.writeHead(200, {'Content-Type': 'text/plain'});
   res.end('Hello World\n');
 }).listen(1337, '127.0.0.1');
+
 console.log('Server running at http://127.0.0.1:1337/');
               </code></pre>
           </section>
@@ -145,48 +178,28 @@ io.sockets.on('connection', function (socket) {
   });
 &lt;/script>
               </code></pre>
+              <ul>
+                <li class="fragment">data-intensive real-time applications</li>
+                <li class="fragment">chat/communication/stream/mongodb/proxy</li>
+              </ul>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>What's NodeJS</h2>
-            <p>Node.js is a platform built on Chrome's JavaScript runtime for easily building fast, scalable network applications. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient, perfect for data-intensive real-time applications that run across distributed devices.</p>
-          </section>
-          <section>
-            <h2>Target</h2>
+            <h2>Technique</h2>
             <ul>
-              <li>Fast, scalable network applications</li>
-              <li>Data-intensive real-time applications</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Scalable</h2>
-            <ul>
-              <li>Pros: I/O scaling problem</li>
-              <li>Cons: compute scaling problem</li>
-            </ul>
-          </section>
-          <section>
-            <h2>DIRTy</h2>
-            <ul>
-              <li>Pros: chat/communication/stream/mongodb/proxy</li>
-              <li>Cons: relational db/heavy cpu computing</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Tech Compositation</h2>
-            <ul>
-              <li>JavaScript - Chrome's JavaScript runtime V8</li>
-              <li>Non-blocking I/O</li>
-              <li>Event Driven</li>
+              <li>JavaScript</li>
+              <li>Asynchronous I/O Programming</li>
+              <li>NPM</li>
+              <li>Pitfalls</li>
             </ul>
           </section>
         </section>
         
         <section>
           <section>
-            <h2>Why JavaScript</h2>
+            <h2>JavaScript</h2>
             <ul>
               <li>Performance</li>
               <li>CommonJS</li>
@@ -196,72 +209,97 @@ io.sockets.on('connection', function (socket) {
             </ul>
           </section>
           <section>
-            <h2>Performance</h2>
-            <p>上图（dive into javascript)</p>
-          </section>
-          <section>
-            <h2>CommonJS</h2>
-            <ul>
-              <li>IO library</li>
-              <li>Package manager</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Multi-paradigm programming</h2>
-            <ul>
-              <li>Functional Programming</li>
-              <li>Prototype-based Object-oriented programming</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Asynchronize friendly</h2>
-            <ul>
-              <li>Browser event loop/ajax</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Functional Programming</h2>
-            <ul>
-              <li>Higher Order Function</li>
-              <li>Closure</li>
-            </ul>
-          </section>
-          <section>
-            <h2>Prototype-based Object-oriented programming</h2>
-            <ul>
-              <li>scope chain</li>
-              <li>prototype chain</li>
-            </ul>
+            <h2>Atwood's law</h2>
+            <blockquote>Any application that can be written in JavaScript, will eventually be written in JavaScript.</blockquote>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Asynchronize I/O</h2>
+            <h2>Asynchronize I/O Programming</h2>
             <ul>
-              <li>non-blocking io</li>
+              <li>Why on-blocking io</li>
               <li>Event Loop</li>
               <li>Asynchronize Programming</li>
             </ul>
           </section>
           <section>
-            <h2>non-blocking io</h2>
-            <ul>
-              <li>(TODO)Linux/Windows nio的实现</li>
-            </ul>
+            <h2>Why non-blocking io</h2>
+            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+              <img width="600" height="500" src="node/io_performance.png" alt="Unicorn">
+            </a>
+          </section>
+          <section>
+            <h2>Synchronize block</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
+var path = require('path');
+
+var files = fs.readdirSync('.');
+files.forEach(function(file){
+  var stat = fs.statSync(file);
+  if(stat.isFile()){
+    var str = fs.readFileSync(file, {encoding: 'utf8'});
+    console.log(file + ":" + str.length);
+  }
+});
+              </code></pre>
+              <ul>
+                <li class="fragment">CPU浪费在等待IO上</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Asynchronize non-block</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
+var path = require('path');
+
+fs.readdir('.', function(err, files){
+  if(err) return console.log(err);
+  var processed = 0;
+  files.forEach(function(file){
+    fs.stat(file, function(err, stat){
+      if(stat.isFile()){
+        fs.readFile(file, {encoding: 'utf8'}, function(err, str){
+          console.log(file + ":" + str.length);
+        });
+      }
+    });
+  });
+
+});
+              </code></pre>
+              <ul>
+                <li class="fragment">Single Javascript thread</li>
+                <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成</li>
+                <li class="fragment">Pyramid of doom</li>
+              </ul>
           </section>
           <section>
             <h2>Event Loop</h2>
+            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+              <img width="800" height="500" src="node/Event_Loop.png" alt="Unicorn">
+            </a>
+          </section>
+          <section>
+            <h2>Asynchronize Programming</h2>
             <ul>
-              <li>Linux/Windows nio的实现</li>
+              <li>Callback</li>
+              <li>Event(Sub/Pub) - Event Emitter</li>
+              <li>Promise/Deferred</li>
+              <li>Library(Async/Step/When/Q/wind)</li>
             </ul>
           </section>
         </section>
 
         <section>
           <section>
-            <h2>Full stack JS Web Dev</h2>
-
+            <h2>Node.js Web Development</h2>
+            <ul>
+              <li>Web Development History</li>
+              <li>Full stack JS Web Dev</li>
+              <li>Node VS Java platform</li>
+            </ul>
           </section>
         </section>
 
@@ -303,15 +341,36 @@ io.sockets.on('connection', function (socket) {
 
         <section>
           <section>
-            <h2>Node VS Java platform</h2>
+            <h2>Full stack JS Web Dev</h2>
+            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+              <img width="700" height="600" src="node/fullstack.png" alt="Unicorn">
+            </a>
+          </section>
+        </section>
 
+        <section>
+          <section>
+            <h2>Node VS Java platform</h2>
+            <ul>
+              <li>Language</li>
+              <li>Platform</li>
+              <li>Frameworks &amp; Tools</li>
+            </ul>
           </section>
         </section>
         
         <section>
           <section>
             <h2>Who use Node</h2>
-
+            <ul>
+              <li>Linkedin</li>
+              <li>Microsoft</li>
+              <li>Yahoo</li>
+              <li>Groupon</li>
+              <li>Paypal</li>
+              <li>Taobao</li>
+              <li>...</li>
+            </ul>
           </section>
         </section>
         
