@@ -1,4 +1,4 @@
-//load the third-part module colors.
+//load the third party module colors.
 var colors = require('colors');
 
 //print out 'Hello Node.js' with colorized.

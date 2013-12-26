@@ -85,16 +85,20 @@ console.log("Hello Node.js".rainbow);
           </section>
           <section>
             <h2>Hello, Asynchronous I/O Programming</h2>
-              <pre><code contenteditable class="javascript">
-//load native module 'fs'.
-var fs = require('fs');
+              <pre><code contenteditable class="javascript">var fs = require('fs');
 
 fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
     if(err) throw err;
     console.log(data);
 });
-console.log('end.');
-              </code></pre>
+console.log('end.');</code></pre>
+              <pre><code contenteditable class="javascript">$.ajax({
+  url: 'http://www.claudejiang.com/echo',
+  data: {param1: 'claude'},
+  success: function(data){
+    ...
+  }
+  });</code></pre>
               <ul>
                 <li class="fragment">Asynchronous I/O APIs</li>
                 <li class="fragment">Asynchronous Programming</li>
@@ -201,7 +205,7 @@ io.sockets.on('connection', function (socket) {
           <section>
             <h2>JavaScript</h2>
             <ul>
-              <li>Performance</li>
+              <li>Performance - V8</li>
               <li>CommonJS</li>
               <li>Multi-paradigm programming</li>
               <li>Asynchronize friendly</li>
@@ -218,7 +222,7 @@ io.sockets.on('connection', function (socket) {
           <section>
             <h2>Asynchronize I/O Programming</h2>
             <ul>
-              <li>Why on-blocking io</li>
+              <li>Why non-blocking io</li>
               <li>Event Loop</li>
               <li>Asynchronize Programming</li>
             </ul>
@@ -235,11 +239,11 @@ io.sockets.on('connection', function (socket) {
 var fs = require('fs');
 var path = require('path');
 
-var files = fs.readdirSync('.');
+var files = fs.readdirSync('.'); // cpu wait
 files.forEach(function(file){
-  var stat = fs.statSync(file);
+  var stat = fs.statSync(file); // cpu wait
   if(stat.isFile()){
-    var str = fs.readFileSync(file, {encoding: 'utf8'});
+    var str = fs.readFileSync(file, {encoding: 'utf8'}); // cpu wait
     console.log(file + ":" + str.length);
   }
 });
@@ -255,23 +259,22 @@ var fs = require('fs');
 var path = require('path');
 
 fs.readdir('.', function(err, files){
-  if(err) return console.log(err);
-  var processed = 0;
-  files.forEach(function(file){
-    fs.stat(file, function(err, stat){
-      if(stat.isFile()){
-        fs.readFile(file, {encoding: 'utf8'}, function(err, str){
-          console.log(file + ":" + str.length);
+    if(err) return console.log(err);
+    var processed = 0;
+    files.forEach(function(file){
+        fs.stat(file, function(err, stat){
+            if(stat.isFile()){
+                fs.readFile(file, {encoding: 'utf8'}, function(err, str){
+                    console.log(file + ":" + str.length);
+                });
+            }
         });
-      }
     });
-  });
-
 });
               </code></pre>
               <ul>
-                <li class="fragment">Single Javascript thread</li>
                 <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成</li>
+                <li class="fragment">Single Javascript thread</li>
                 <li class="fragment">Pyramid of doom</li>
               </ul>
           </section>
@@ -310,31 +313,31 @@ fs.readdir('.', function(err, files){
           <section>
             <h2>Static HTML content</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/1.png" alt="Unicorn">
+              <img width="600" height="300" src="node/1.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>dynamic HTML</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/3.png" alt="Unicorn">
+              <img width="600" height="400" src="node/3.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>Ajax</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/4.png" alt="Unicorn">
+              <img width="600" height="350" src="node/4.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>Server side MVC</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/5.png" alt="Unicorn">
+              <img width="600" height="700" src="node/5.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>Client side MVC</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/7.png" alt="Unicorn">
+              <img width="600" height="400" src="node/7.png" alt="Unicorn">
             </a>
           </section>
         </section>
@@ -343,8 +346,22 @@ fs.readdir('.', function(err, files){
           <section>
             <h2>Full stack JS Web Dev</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="700" height="600" src="node/fullstack.png" alt="Unicorn">
+              <img width="600" height="550" src="node/fullstack.png" alt="Unicorn">
             </a>
+            <p/>
+            <ul>
+              <li class="fragment">MEAN stack</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Isomorphic JavaScript</h2>
+            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+              <img width="500" height="500" src="node/oj.png" alt="Unicorn">
+            </a>
+            <p/>
+            <ul>
+              <li class="fragment">Meteor.js</li>
+            </ul>
           </section>
         </section>
 
@@ -365,9 +382,9 @@ fs.readdir('.', function(err, files){
             <ul>
               <li>Linkedin</li>
               <li>Microsoft</li>
-              <li>Yahoo</li>
               <li>Groupon</li>
               <li>Paypal</li>
+              <li>Yahoo</li>
               <li>Taobao</li>
               <li>...</li>
             </ul>
