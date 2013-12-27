@@ -305,7 +305,7 @@ io.sockets.on('connection', function (socket) {
           </section>
           <section>
             <h2>Why non-blocking io</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="400" src="img/latency-bar-graph.png" alt="Unicorn">
             </a>
             <ul>
@@ -360,7 +360,6 @@ fs.readdir('.', function(err, files){
               </code></pre>
               <ul>
                 <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成(Max(M,N))</li>
-                <li class="fragment">Single Javascript thread</li>
                 <li class="fragment">Pyramid of doom(Callback hell)</li>
               </ul>
               <aside class="notes">
@@ -369,12 +368,19 @@ fs.readdir('.', function(err, files){
           </section>
           <section>
             <h2>Event Loop</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="800" height="500" src="node/Event_Loop.png" alt="Unicorn">
             </a>
+              <ul>
+                <li class="fragment">Single Javascript thread</li>
+                <li class="fragment">Lower memory cost</li>
+                <li class="fragment">High bound selects</li>
+              </ul>
             <aside class="notes">
             Node使用时间循环来处理异步。
+            与单线程事件模型相对应的是多进程，单进程多线程。
             当一个request在处理过程中，所有的IO和网络操作都是异步的，异步处理会将回调绑定到事件循环中，作为时间循环的观察者，当事件处理完毕后，通过事件循环出发回调函数。
+            一个运行时间很长的方法会阻塞其他请求。
             </aside>
           </section>
           <section>
@@ -395,7 +401,7 @@ fs.readdir('.', function(err, files){
         <section>
           <section>
             <h2>NPM</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="500" height="500" src="node/npm_download.jpg" alt="Unicorn">
             </a>
             <p/>
@@ -430,19 +436,19 @@ fs.readdir('.', function(err, files){
           </section>
           <section>
             <h2>Static HTML content</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="300" src="node/1.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>dynamic HTML</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="400" src="node/3.png" alt="Unicorn">
             </a>
           </section>
           <section>
             <h2>Ajax</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="350" src="node/4.png" alt="Unicorn">
             </a>
             <aside class="notes">
@@ -454,7 +460,7 @@ fs.readdir('.', function(err, files){
           </section>
           <section>
             <h2>Server side MVC</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="700" src="node/5.png" alt="Unicorn">
             </a>
             <aside class="notes">
@@ -465,12 +471,12 @@ fs.readdir('.', function(err, files){
           </section>
           <section>
             <h2>Client side MVC</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="400" src="node/7.png" alt="Unicorn">
             </a>
             <aside class="notes">
             1 page = html + css + js
-            1 page = 100+ pv
+            1 page = 10 - 100+ pv
             1.丰富的js library
             2. html 5
             3. mobile web
@@ -478,12 +484,22 @@ fs.readdir('.', function(err, files){
             5. restful api
             </aside>
           </section>
+          <section>
+            <h2>Front-ends/Back-ends</h2>
+            <a href="#">
+              <img width="600" height="400" src="node/fb.png" alt="Unicorn">
+            </a>
+            <aside class="notes">
+              前端处理UI和跟服务交互。
+              后端可以采用其他语言开发，使用关系型数据的应用最好还是采用Java等语言开发。
+            </aside>
+          </section>
         </section>
 
         <section>
           <section>
             <h2>Full stack JS Web Dev</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="600" height="550" src="node/fullstack.png" alt="Unicorn">
             </a>
             <p/>
@@ -498,7 +514,7 @@ fs.readdir('.', function(err, files){
           </section>
           <section>
             <h2>Isomorphic JavaScript</h2>
-            <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
+            <a href="#">
               <img width="500" height="500" src="node/oj.png" alt="Unicorn">
             </a>
             <p/>
