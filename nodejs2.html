@@ -306,8 +306,18 @@ io.sockets.on('connection', function (socket) {
           <section>
             <h2>Why non-blocking io</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
-              <img width="600" height="500" src="node/io_performance.png" alt="Unicorn">
+              <img width="600" height="400" src="img/latency-bar-graph.png" alt="Unicorn">
             </a>
+            <ul>
+              <li>Synchronize block: M+N</li>
+              <li>Asynchronize non-block: Max(M,N)</li>
+            </ul>
+            <aside class="notes">
+              上图为系统各个环节中所需要的CPU时钟。
+              在阻塞模式下，由于IO和网络的工作的过程中，CPU需要等待IO。(M+N)
+              在非阻塞模式下，可以从分利用IO，减少CPU等待。Max(N,N)。
+              举个例子：ajax,client段的多线程处理UI。
+            </aside>
           </section>
           <section>
             <h2>Synchronize block</h2>
@@ -325,7 +335,7 @@ files.forEach(function(file){
 });
               </code></pre>
               <ul>
-                <li class="fragment">CPU浪费在等待IO上</li>
+                <li class="fragment">CPU浪费在等待IO上(M+N)</li>
               </ul>
           </section>
           <section>
@@ -349,16 +359,23 @@ fs.readdir('.', function(err, files){
 });
               </code></pre>
               <ul>
-                <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成</li>
+                <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成(Max(M,N))</li>
                 <li class="fragment">Single Javascript thread</li>
                 <li class="fragment">Pyramid of doom(Callback hell)</li>
               </ul>
+              <aside class="notes">
+                回调函数嵌套
+              </aside>
           </section>
           <section>
             <h2>Event Loop</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
               <img width="800" height="500" src="node/Event_Loop.png" alt="Unicorn">
             </a>
+            <aside class="notes">
+            Node使用时间循环来处理异步。
+            当一个request在处理过程中，所有的IO和网络操作都是异步的，异步处理会将回调绑定到事件循环中，作为时间循环的观察者，当事件处理完毕后，通过事件循环出发回调函数。
+            </aside>
           </section>
           <section>
             <h2>Asynchronize Programming</h2>
@@ -368,6 +385,10 @@ fs.readdir('.', function(err, files){
               <li>Promise/Deferred</li>
               <li>Library(Async/Step/When/Q/wind)</li>
             </ul>
+            <aside class="notes">
+            如何处理回调地狱
+            写过朴灵的《深入浅出node.js》。自称可以“一个能搞定回调函数嵌套的男人”
+            </aside>
           </section>
         </section>
 
