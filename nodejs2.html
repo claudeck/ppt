@@ -57,6 +57,7 @@
           </ul>
           <aside class="notes">
             简单的介绍今天的议题，主要讲第一个，后面两个简单介绍。
+            假设大家有JavaScript和Java开发背景。
           </aside>
         </section>
 
@@ -162,6 +163,7 @@ rs.on('end', function(){
                 <li class="fragment">Use Event(Sub/Pub) for Async IO</li>
                 <li class="fragment">Buffer</li>
                 <li class="fragment">Stream/pipe</li>
+                <li class="fragment">Unix/Linux philosophy</li>
               </ul>
               <aside class="notes">
                 第一个例子使用回调来处理异步，这个例子使用了事件来处理异步。
@@ -251,7 +253,6 @@ io.sockets.on('connection', function (socket) {
               <li>JavaScript</li>
               <li>Asynchronous I/O Programming</li>
               <li>NPM</li>
-              <li>Pitfalls</li>
             </ul>
           </section>
         </section>
@@ -266,10 +267,30 @@ io.sockets.on('connection', function (socket) {
               <li>Asynchronize friendly</li>
               <li>Atwood's law</li>
             </ul>
+            <aside class="notes">
+              1. v8的性能是脚本语言中最好的之一，加上原生c++模块可以处理一些性能要求比较高的场景。
+              2. nodejs没有完全按照commonjs的标准，是commonjs的一种实践，其中主要实现了包管理和一些io api。
+              3.函数式编程
+                A.高阶函数
+                B.闭包
+              4.基于原型链继承的面向对象
+              5.异步友好(broswer上的事件循环和ajax)
+              6.libray可以服务端和客户端共用
+            </aside>
           </section>
           <section>
             <h2>Atwood's law</h2>
             <blockquote>Any application that can be written in JavaScript, will eventually be written in JavaScript.</blockquote>
+            <ul>
+              <li>Linux VM: <a href="http://bellard.org/jslinux/" target="_blank">jsLinux</a></li>
+              <li>Emulator: <a href="http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-Timers" target="_blank">GameBoy emulator</a></li>
+              <li>Cloud IDE: <a href="https://www.nitrous.io/" target="_blank">Nitrous</a> <a href="https://c9.io/" target="_blank">Cloud9 IDE</a></li>
+              <li>Testing: <a href="https://browserling.com/" target="_blank">Browserling</a> <a href="http://phantomjs.org/" target="_blank">PhantomJS</a></li>
+              <li>Client Dev: <a href="https://github.com/rogerwang/node-webkit" target="_blank">Node-webkit</a></li>
+              <li>Mobile Dev: <a href="http://phonegap.com/" target="_blank">Phonegap</a></li>
+              <li>Game Dev: <a href="http://pomelo.netease.com/" target="_blank">Pomelo</a> <a href="http://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a> <a href="http://asmjs.org/" target="_blank">asm.js</a></li>
+              <li>Hardware: <a href="http://tessel.io/" target="_blank">Tessel</a></li>
+            </ul>
           </section>
         </section>
 
@@ -330,7 +351,7 @@ fs.readdir('.', function(err, files){
               <ul>
                 <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成</li>
                 <li class="fragment">Single Javascript thread</li>
-                <li class="fragment">Pyramid of doom</li>
+                <li class="fragment">Pyramid of doom(Callback hell)</li>
               </ul>
           </section>
           <section>
@@ -356,6 +377,19 @@ fs.readdir('.', function(err, files){
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
               <img width="500" height="500" src="node/npm_download.jpg" alt="Unicorn">
             </a>
+            <p/>
+            <ul>
+              <li class="fragment">Sharing is encouraged</li>
+            </ul>
+          </section>
+          <section>
+            <h2>NPM</h2>
+            <ul>
+              <li>npm install &lt;module name&gt;</li>
+              <li>npm install -g &lt;module name&gt;</li>
+              <li>Module lookup</li>
+              <li>Private NPM</li>
+            </ul>
           </section>
         </section>
 
@@ -390,18 +424,38 @@ fs.readdir('.', function(err, files){
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
               <img width="600" height="350" src="node/4.png" alt="Unicorn">
             </a>
+            <aside class="notes">
+            no refresh
+            reduce requests
+            better ue
+            send html/xml
+            </aside>
           </section>
           <section>
             <h2>Server side MVC</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
               <img width="600" height="700" src="node/5.png" alt="Unicorn">
             </a>
+            <aside class="notes">
+            large project architecture
+            layered
+            send html segment/json
+            </aside>
           </section>
           <section>
             <h2>Client side MVC</h2>
             <a href="http://blog.fogcreek.com/the-trello-tech-stack/">
               <img width="600" height="400" src="node/7.png" alt="Unicorn">
             </a>
+            <aside class="notes">
+            1 page = html + css + js
+            1 page = 100+ pv
+            1.丰富的js library
+            2. html 5
+            3. mobile web
+            4. send json
+            5. restful api
+            </aside>
           </section>
         </section>
 
@@ -415,6 +469,11 @@ fs.readdir('.', function(err, files){
             <ul>
               <li class="fragment">MEAN stack</li>
             </ul>
+            <aside class="notes">
+              Mongo + express + angular + node.js
+              grunt + mocha + jscover
+              better for object db or restful server proxy
+            </aside>
           </section>
           <section>
             <h2>Isomorphic JavaScript</h2>
@@ -448,6 +507,10 @@ fs.readdir('.', function(err, files){
             <h2>Thank you</h2>
             <blockquote>I hear and I forget. I see and I remember. I do and I understand.</blockquote>
             <blockquote>不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之；学至于行之而止矣。- 荀子《儒效篇》</blockquote>
+            <aside class="notes">
+              实践是最好的学习方式。按照自己的思路，查阅node的api，实现自己的设想。
+因为node更加底层，所以可以让我们学习到更多系统底层的东西
+            </aside>
           </section>
         </section>
         
