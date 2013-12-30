@@ -1,378 +1,605 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+    <title>Node.js Introduction</title>
 
-		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-		<meta name="author" content="Hakim El Hattab">
+    <meta name="description" content="How to study Javascript">
+    <meta name="author" content="Claude Jiang">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <!--
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <link rel="stylesheet" href="lib/css/github.css">
+  -->
+    <link rel="stylesheet" href="lib/css/xcode.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
-					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
-					</p>
-				</section>
+        <section>
+          <h1>Node.js Introduction</h1>
+          <p>
+            <small>Speaker : <a href="http://www.claudejiang.com">Claude Jiang</a></small>
+          </p>
+        </section>
 
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
+        <section>
+          <h2>Agenda</h2>
+          <ul>
+            <li>What's Node</li>
+            <li>Node Web development</li>
+            <li>Who use Node</li>
+          </ul>
+          <aside class="notes">
+            简单的介绍今天的议题，主要讲第一个，后面两个简单介绍。
+            假设大家有JavaScript和Java开发背景。
+          </aside>
+        </section>
 
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+        <section>
+          <section>
+            <h2>What's Node</h2>
+            <p>Node.js is a platform built on <a href="#">Chrome's JavaScript runtime</a> for easily building fast, scalable network applications. Node.js uses an <a href="#">event-driven</a>, <a href="#">non-blocking I/O</a> model that makes it lightweight and efficient, perfect for <a href="#">data-intensive real-time applications</a> that run across distributed devices.</p>
+          <aside class="notes">
+            这个是官网给出来的定义。
+            可能很多人对于这个定义出现的这个名词都不熟悉。我们这次培训主要的目的就是讲清楚这些东西。我会先从一些你们熟悉的东西慢慢把你们带入node的世界。
+          </aside>
+          </section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>Vertical Slides</h2>
-						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
-					</section>
-					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
-					</section>
-					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
-					</section>
-				</section>
+          <section>
+            <h2>Node VS Java platform</h2>
+            <ul>
+              <li>Language</li>
+              <li>Platform</li>
+              <li>Frameworks &amp; Tools</li>
+            </ul>
+          <aside class="notes">
+            Node并不是简单的运行于服务器端的JS。
+            JS在其被发明的初段就已经有用于服务器端Livewire。Rhino.
+            语言方面：Java使用的是java language,Node使用的是JS。Java运行于Jvm虚拟机，node运行于v8 js引擎。
+            平台方面：Java运行于Java平台。而node本身称得上平台。
+            框架和工具：struts。express。grunt,ant,maven.
+          </aside>
+          </section>
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview. Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
+          <section>
+            <blockquote>Talk is cheap. Show me the code. <br/>- Linus Torvalds</blockquote>
+          </section>
+          <section>
+            <h2>Hello, Server side javascript</h2>
+              <pre><code contenteditable class="javascript">
+//load third party module 'colors'.
+var colors = require('colors');
 
-				<section>
-					<h2>rvl.io</h2>
-					<p>
-						If you don't like writing slides in HTML you can use the online editor <a href="http://www.rvl.io" target="_blank">rvl.io</a>.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
-					</p>
-				</section>
-
-				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
-				</section>
-
-				<section>
-					<h2>Fantastic Ordered List</h2>
-					<ol>
-						<li>One is smaller than...</li>
-						<li>Two is smaller than...</li>
-						<li>Three!</li>
-					</ol>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-						## Markdown support
-
-						For those of you who like that sort of thing. Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-
-							<section data-markdown>
-							  ## Markdown support
-
-							  For those of you who like that sort of thing.
-							  Instructions and a bit more info available [here](https://github.com/hakimel/reveal.js#markdown).
-							</section>
-					</script>
-				</section>
-
-				<section id="transitions">
-					<h2>Transition Styles</h2>
-					<p>
-						You can select from different transitions, like: <br>
-						<a href="?transition=cube#/transitions">Cube</a> -
-						<a href="?transition=page#/transitions">Page</a> -
-						<a href="?transition=concave#/transitions">Concave</a> -
-						<a href="?transition=zoom#/transitions">Zoom</a> -
-						<a href="?transition=linear#/transitions">Linear</a> -
-						<a href="?transition=fade#/transitions">Fade</a> -
-						<a href="?transition=none#/transitions">None</a> -
-						<a href="?#/transitions">Default</a>
-					</p>
-				</section>
-
-				<section id="themes">
-					<h2>Themes</h2>
-					<p>
-						Reveal.js comes with a few themes built in: <br>
-						<a href="?theme=sky#/themes">Sky</a> -
-						<a href="?theme=beige#/themes">Beige</a> -
-						<a href="?theme=simple#/themes">Simple</a> -
-						<a href="?theme=serif#/themes">Serif</a> -
-						<a href="?theme=night#/themes">Night</a> -
-						<a href="?#/themes">Default</a>
-					</p>
-					<p>
-						<small>
-							* Theme demos are loaded after the presentation which leads to flicker. In production you should load your theme in the <code>&lt;head&gt;</code> using a <code>&lt;link&gt;</code>.
-						</small>
-					</p>
-				</section>
-
-				<section>
-					<section data-state="alert">
-						<h2>Global State</h2>
-						<p>
-							Set <code>data-state="something"</code> on a slide and <code>"something"</code>
-							will be added as a class to the document element when the slide is open. This lets you
-							apply broader style changes, like switching the background.
-						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="blackout">
-						<h2>"blackout"</h2>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
-					</section>
-					<section data-state="soothe">
-						<h2>"soothe"</h2>
-						<a href="#" class="image navigate-next">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(-90deg);">
-						</a>
-					</section>
-				</section>
-
-				<section data-state="customevent">
-					<h2>Custom Events</h2>
-					<p>
-						Additionally custom events can be triggered on a per slide basis by binding to the <code>data-state</code> name.
-					</p>
-					<pre><code contenteditable style="font-size: 18px; margin-top: 20px;">Reveal.addEventListener( 'customevent', function() {
-	console.log( '"customevent" has fired' );
-} );
-					</code></pre>
-				</section>
-
-				<section>
-					<h2>Clever Quotes</h2>
-					<p>
-						These guys come in two forms, inline: <q cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						The nice thing about standards is that there are so many to choose from</q> and block:
-					</p>
-					<blockquote cite="http://searchservervirtualization.techtarget.com/definition/Our-Favorite-Technology-Quotations">
-						For years there has been a theory that millions of monkeys typing at random on millions of typewriters would
-						reproduce the entire works of Shakespeare. The Internet has proven this theory to be untrue.
-					</blockquote>
-				</section>
-
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code contenteditable>
-function linkify( selector ) {
-  if( supports3DTransforms ) {
-
-    var nodes = document.querySelectorAll( selector );
-
-    for( var i = 0, len = nodes.length; i &lt; len; i++ ) {
-      var node = nodes[i];
-
-      if( !node.className ) ) {
-        node.className += ' roll';
-      }
-    };
+//print out 'Hello Node.js' with colorized.
+console.log("Hello Node.js".rainbow);
+              </code></pre>
+              <ul>
+                <li class="fragment">Chrome Javascript runtime - V8</li>
+                <li class="fragment">API for server side</li>
+                <li class="fragment">NPM</li>
+              </ul>
+              <aside class="notes">
+                先跑一下例子。
+                我们从这个例子中可以了解到。
+                1.以前JS是跑在浏览器的，没有io,模块管理等机制。node在v8和commonjs之上把这些机制建立起来。
+                2.第一句用于引入colors模块，该模块的功能是使用控制台的一些转义字符输出带颜色的文字
+                3.模块机制不像namespace有命名的限制，你可以对你引入的模块任意取名。
+                4.第二句话用于将字符串打印出来，console.log在浏览器上也有存在，在node中它等同于输出到标准输出上。
+                https://github.com/marak/colors.js/
+              </aside>
+          </section>
+          <section>
+            <h2>Hello, Asynchronous I/O Programming</h2>
+            <pre class="fragment"><code contenteditable class="javascript">$.ajax({
+  url: 'http://www.claudejiang.com/echo',
+  data: {param1: 'claude'},
+  success: function(data){
+    ...
   }
-}
-					</code></pre>
-					<p>Courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
+});</code></pre>
+              <pre class="fragment"><code contenteditable class="javascript">var fs = require('fs');
 
-				<section>
-					<h2>Intergalactic Interconnections</h2>
-					<p>
-						You can link between slides internally,
-						<a href="#/2/3">like this</a>.
-					</p>
-				</section>
+fs.readFile('text.txt', {encoding: 'UTF-8'}, function(err, data){
+    if(err) throw err;
+    console.log(data);
+});
+console.log('end.');</code></pre>
+              
+              <ul>
+                <li class="fragment">Asynchronous I/O APIs</li>
+                <li class="fragment">Asynchronous Programming</li>
+                <li class="fragment">Node style callback</li>
+              </ul>
+              <aside class="notes">
+                1.第一段代码是我们经常在网页上看到的ajax请求，浏览器端的javascript天生对异步友好，像ajax请求使用回调的方式，browser上的dom的事件回调以及最新的jquery的ajax使用promise重写，这些都是异步编程在浏览器端的应用。
+                2.接下来演示一个异步IO的例子。非阻塞IO是Node的核心。node的绝大部分api都是用来处理IO和网络的，通过灵活应用可以生产出各种应用。
+                3.fs模块的sync和async api
+                4.sio和aio的区别。
+                5.function(err, data)。node风格的回调处理。异常处理是node异步编程的难点之一。
+              </aside>
+          </section>
+          <section>
+            <h2>Hello, Buffer/Stream/Event Emitter</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
 
-				<section>
-					<section>
-						<h2>Fragmented Views</h2>
-						<p>Hit the next arrow...</p>
-						<p class="fragment">... to step through ...</p>
-						<ol>
-							<li class="fragment"><code>any type</code></li>
-							<li class="fragment"><em>of view</em></li>
-							<li class="fragment"><strong>fragments</strong></li>
-						</ol>
+var rs = fs.createReadStream(__filename);
+rs.on('data', function(data){
+  // console.log(data);
+  console.log(data.toString());
+});
+rs.on('end', function(){
+  console.log('end');
+});
+// rs.pipe(process.stdout);
+              </code></pre>
+              <ul>
+                <li class="fragment">Use Event(Sub/Pub) for Async IO</li>
+                <li class="fragment">Buffer</li>
+                <li class="fragment">Stream/pipe</li>
+                <li class="fragment">Unix/Linux philosophy</li>
+              </ul>
+              <aside class="notes">
+                第一个例子使用回调来处理异步，这个例子使用了事件来处理异步。
+                在对Stream的操作中，我们一般会处理到data, end, error三个事件。
+                而data如果没有指定字符编码的话，会返回Buffer对象。Buffer是Node用于二进制处理的对象。(1.Node的内存管理，2.Buffer和ECMAScript中的ArrayBuffer).
+                Linux符合JS哲学，Linux的哲学中，一切都是文件，让每一个程序成为过滤器。（Stream.pipe, connect.use）每一个程序之做好一件事情(npm);
+              </aside>
+          </section>
+          <section>
+            <h2>Hello, TCP Programming</h2>
+              <pre><code contenteditable class="javascript">
+// load net module
+var net = require('net');
 
-						<aside class="notes">
-							This slide has fragments which are also stepped through in the notes window.
-						</aside>
-					</section>
-					<section>
-						<h2>Fragment Styles</h2>
-						<p>There's a few styles of fragments, like:</p>
-						<p class="fragment grow">grow</p>
-						<p class="fragment shrink">shrink</p>
-						<p class="fragment roll-in">roll-in</p>
-						<p class="fragment fade-out">fade-out</p>
-						<p class="fragment highlight-red">highlight-red</p>
-						<p class="fragment highlight-green">highlight-green</p>
-						<p class="fragment highlight-blue">highlight-blue</p>
-					</section>
-				</section>
+// create a tcp server
+var server = net.createServer(function (socket) {
+  socket.on('data', function(data){
+    socket.pipe(socket);
+  });
+});
 
-				<section>
-					<h2>Spectacular image!</h2>
-					<a class="image" href="http://lab.hakim.se/meny/" target="_blank">
-						<img width="320" height="299" src="http://s3.amazonaws.com/hakim-static/portfolio/images/meny.png" alt="Meny">
-					</a>
-				</section>
+// bind to port 7000 on localhost
+server.listen(7000, "localhost");
 
-				<section>
-					<h2>Export to PDF</h2>
-					<p>Presentations can be <a href="https://github.com/hakimel/reveal.js#pdf-export">exported to PDF</a>, below is an example that's been uploaded to SlideShare.</p>
-					<iframe id="slideshare" src="http://www.slideshare.net/slideshow/embed_code/13872948" width="455" height="356" style="margin:0;overflow:hidden;border:1px solid #CCC;border-width:1px 1px 0;margin-bottom:5px" allowfullscreen> </iframe>
-					<script>
-						document.getElementById('slideshare').attributeName = 'allowfullscreen';
-					</script>
-				</section>
+console.log("TCP server listening on port 7000 at localhost.");
+              </code></pre>
+              <aside class="notes">
+              演示例子。把客户端的信息原样返回。
+              在Node中开发tcp/udp应用是非常简单的。socket是一个双工流对象。只要了解流怎么应用，就可以很简单的开发一些网络应用。
+              </aside>
+          </section>
+          <section>
+            <h2>Hello, Web Programming</h2>
+              <pre><code contenteditable class="javascript">
+var http = require('http');
 
-				<section>
-					<h2>Take a Moment</h2>
-					<p>
-						Press b or period on your keyboard to enter the 'paused' mode. This mode is helpful when you want to take distracting slides off the screen
-						during a presentation.
-					</p>
-				</section>
+http.createServer(function (req, res) {
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end('Hello World\n');
+}).listen(1337, '127.0.0.1');
 
-				<section>
-					<h2>Stellar Links</h2>
-					<ul>
-						<li><a href="https://github.com/hakimel/reveal.js">Source code on GitHub</a></li>
-						<li><a href="http://hakim.se/projects/reveal-js">Leave feedback on my site</a></li>
-						<li><a href="http://twitter.com/hakimel">Follow me on Twitter</a></li>
-					</ul>
-				</section>
+console.log('Server running at http://127.0.0.1:1337/');
+              </code></pre>
+              <aside class="notes">
+              在Node中开发web应用也是件简单的事。
+              Node并不是一个Web框架，它是一个平台，可以使用它提供的http模块很简单的开发出一个http server。
+              Http模块是建立在net模块之上的，只是在其上对keep-alive做了一些封装，其他request,response对象都只是简单的对输入流和输出流进行了封装。
+              </aside>
+          </section>
+          <section>
+            <h2>Hello DIRTy, Socket.io Programming</h2>
+              <pre><code contenteditable class="javascript">
+var io = require('socket.io').listen(80);
 
-				<section>
-					<h2>It's free</h2>
-					<p>
-						reveal.js and <a href="http://www.rvl.io">rvl.io</a> are entirely free but if you'd like to support the projects you can donate below.
-						Donations will go towards hosting and domain costs.
-					</p>
-					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_donations">
-						<input type="hidden" name="business" value="hakim.elhattab@gmail.com">
-						<input type="hidden" name="lc" value="US">
-						<input type="hidden" name="item_name" value="reveal.js / rvl.io">
-						<input type="hidden" name="no_note" value="0">
-						<input type="hidden" name="currency_code" value="USD">
-						<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHostedGuest">
-						<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-					</form>
-				</section>
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
+              </code></pre>
+              <pre><code contenteditable class="html">
+&lt;script src="/socket.io/socket.io.js">&lt;/script>
+&lt;script>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+&lt;/script>
+              </code></pre>
+              <ul>
+                <li class="fragment">data-intensive real-time applications</li>
+                <li class="fragment">chat/communication/stream/mongodb/proxy</li>
+              </ul>
+              <aside class="notes">
+              Node最适合的应用场景介绍
+              进一步演示一些node in action中简单的chat应用。
+              </aside>
+          </section>
+        </section>
 
-				<section>
-					<h1>THE END</h1>
-					<h3>BY Hakim El Hattab / hakim.se</h3>
-				</section>
+        <section>
+          <section>
+            <h2>Technique</h2>
+            <ul>
+              <li>JavaScript</li>
+              <li>Asynchronous I/O Programming</li>
+              <li>NPM</li>
+            </ul>
+          </section>
+        </section>
+        
+        <section>
+          <section>
+            <h2>JavaScript</h2>
+            <ul>
+              <li>Performance - V8</li>
+              <li>CommonJS</li>
+              <li>Multi-paradigm programming</li>
+              <li>Asynchronize friendly</li>
+              <li>Atwood's law</li>
+            </ul>
+            <aside class="notes">
+              1. v8的性能是脚本语言中最好的之一，加上原生c++模块可以处理一些性能要求比较高的场景。
+              2. nodejs没有完全按照commonjs的标准，是commonjs的一种实践，其中主要实现了包管理和一些io api。
+              3.函数式编程
+                A.高阶函数
+                B.闭包
+              4.基于原型链继承的面向对象
+              5.异步友好(broswer上的事件循环和ajax)
+              6.libray可以服务端和客户端共用
+            </aside>
+          </section>
+          <section>
+            <h2>Atwood's law</h2>
+            <blockquote>Any application that can be written in JavaScript, will eventually be written in JavaScript.</blockquote>
+            <ul>
+              <li>Linux VM: <a href="http://bellard.org/jslinux/" target="_blank">jsLinux</a></li>
+              <li>Emulator: <a href="http://imrannazar.com/GameBoy-Emulation-in-JavaScript:-Timers" target="_blank">GameBoy emulator</a></li>
+              <li>Cloud IDE: <a href="https://www.nitrous.io/" target="_blank">Nitrous</a> <a href="https://c9.io/" target="_blank">Cloud9 IDE</a></li>
+              <li>Testing: <a href="https://browserling.com/" target="_blank">Browserling</a> <a href="http://phantomjs.org/" target="_blank">PhantomJS</a></li>
+              <li>Client Dev: <a href="https://github.com/rogerwang/node-webkit" target="_blank">Node-webkit</a></li>
+              <li>Mobile Dev: <a href="http://phonegap.com/" target="_blank">Phonegap</a></li>
+              <li>Game Dev: <a href="http://pomelo.netease.com/" target="_blank">Pomelo</a> <a href="http://en.wikipedia.org/wiki/WebGL" target="_blank">WebGL</a> <a href="http://asmjs.org/" target="_blank">asm.js</a></li>
+              <li>Hardware: <a href="http://tessel.io/" target="_blank">Tessel</a></li>
+            </ul>
+          </section>
+        </section>
 
-			</div>
+        <section>
+          <section>
+            <h2>Asynchronize I/O Programming</h2>
+            <ul>
+              <li>Why non-blocking io</li>
+              <li>Event Loop</li>
+              <li>Asynchronize Programming</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Why non-blocking io</h2>
+            <a href="#">
+              <img width="600" height="400" src="img/latency-bar-graph.png" alt="Unicorn">
+            </a>
+            <ul>
+              <li>Synchronize block: M+N</li>
+              <li>Asynchronize non-block: Max(M,N)</li>
+            </ul>
+            <aside class="notes">
+              上图为系统各个环节中所需要的CPU时钟。
+              在阻塞模式下，由于IO和网络的工作的过程中，CPU需要等待IO。(M+N)
+              在非阻塞模式下，可以从分利用IO，减少CPU等待。Max(N,N)。
+              举个例子：ajax,client段的多线程处理UI。
+            </aside>
+          </section>
+          <section>
+            <h2>Synchronize block</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
+var path = require('path');
 
-		</div>
+var files = fs.readdirSync('.'); // cpu wait
+files.forEach(function(file){
+  var stat = fs.statSync(file); // cpu wait
+  if(stat.isFile()){
+    var str = fs.readFileSync(file, {encoding: 'utf8'}); // cpu wait
+    console.log(file + ":" + str.length);
+  }
+});
+              </code></pre>
+              <ul>
+                <li class="fragment">CPU浪费在等待IO上(M+N)</li>
+              </ul>
+          </section>
+          <section>
+            <h2>Asynchronize non-block</h2>
+              <pre><code contenteditable class="javascript">
+var fs = require('fs');
+var path = require('path');
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+fs.readdir('.', function(err, files){
+    if(err) return console.log(err);
+    files.forEach(function(file){
+        fs.stat(file, function(err, stat){
+            if(stat.isFile()){
+                fs.readFile(file, {encoding: 'utf8'}, function(err, str){
+                    console.log(file + ":" + str.length);
+                });
+            }
+        });
+    });
+});
+              </code></pre>
+              <ul>
+                <li class="fragment">CPU不需要等待IO完成，通过回调或者事件通知完成(Max(M,N))</li>
+                <li class="fragment">Pyramid of doom(Callback hell)</li>
+              </ul>
+              <aside class="notes">
+                回调函数嵌套
+              </aside>
+          </section>
+          <section>
+            <h2>Event Loop</h2>
+            <a href="#">
+              <img width="800" height="500" src="node/Event_Loop.png" alt="Unicorn">
+            </a>
+              <ul>
+                <li class="fragment">Single Javascript thread</li>
+                <li class="fragment">Lower memory cost</li>
+                <li class="fragment">High bound selects</li>
+              </ul>
+            <aside class="notes">
+            Node使用时间循环来处理异步。
+            与单线程事件模型相对应的是多进程，单进程多线程。
+            当一个request在处理过程中，所有的IO和网络操作都是异步的，异步处理会将回调绑定到事件循环中，作为时间循环的观察者，当事件处理完毕后，通过事件循环出发回调函数。
+            一个运行时间很长的方法会阻塞其他请求。
+            </aside>
+          </section>
+          <section>
+            <h2>Asynchronize Programming</h2>
+            <ul>
+              <li>Callback</li>
+              <li>Event(Sub/Pub) - Event Emitter</li>
+              <li>Promise/Deferred</li>
+              <li>Library(Async/Step/When/Q/wind)</li>
+            </ul>
+            <aside class="notes">
+            如何处理回调地狱
+            写过朴灵的《深入浅出node.js》。自称可以“一个能搞定回调函数嵌套的男人”
+            </aside>
+          </section>
+        </section>
 
-		<script>
+        <section>
+          <section>
+            <h2>NPM</h2>
+            <a href="#">
+              <img width="500" height="500" src="node/npm_download.jpg" alt="Unicorn">
+            </a>
+            <p/>
+            <ul>
+              <li class="fragment">Sharing is encouraged</li>
+            </ul>
+          </section>
+          <section>
+            <h2>NPM</h2>
+            <ul>
+              <li>npm install &lt;module name&gt;</li>
+              <li>npm install -g &lt;module name&gt;</li>
+              <li>Module lookup</li>
+              <li>Private NPM</li>
+            </ul>
+          </section>
+        </section>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+        <section>
+          <section>
+            <h2>Node.js Web Development</h2>
+            <ul>
+              <li>Web Development History</li>
+              <li>Full stack JS Web Dev</li>
+            </ul>
+          </section>
+        </section>
 
-				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        <section>
+          <section>
+            <h2>Web Development History</h2>
+          </section>
+          <section>
+            <h2>Static HTML content</h2>
+            <a href="#">
+              <img width="600" height="300" src="node/1.png" alt="Unicorn">
+            </a>
+          </section>
+          <section>
+            <h2>dynamic HTML</h2>
+            <a href="#">
+              <img width="600" height="400" src="node/3.png" alt="Unicorn">
+            </a>
+          </section>
+          <section>
+            <h2>Ajax</h2>
+            <a href="#">
+              <img width="600" height="350" src="node/4.png" alt="Unicorn">
+            </a>
+            <aside class="notes">
+            no refresh
+            reduce requests
+            better ue
+            send html/xml
+            </aside>
+          </section>
+          <section>
+            <h2>Server side MVC</h2>
+            <a href="#">
+              <img width="600" height="700" src="node/5.png" alt="Unicorn">
+            </a>
+            <aside class="notes">
+            large project architecture
+            layered
+            send html segment/json
+            </aside>
+          </section>
+          <section>
+            <h2>Client side MVC</h2>
+            <a href="#">
+              <img width="600" height="400" src="node/7.png" alt="Unicorn">
+            </a>
+            <aside class="notes">
+            1 page = html + css + js
+            1 page = 10 - 100+ pv
+            1.丰富的js library
+            2. html 5
+            3. mobile web
+            4. send json
+            5. restful api
+            6. web page - web app
+            </aside>
+          </section>
+          <section>
+            <h2>Front-ends/Back-ends</h2>
+            <a href="#">
+              <img width="600" height="400" src="node/fb.png" alt="Unicorn">
+            </a>
+            <aside class="notes">
+              前端处理UI和跟服务交互。
+              后端可以采用其他语言开发，使用关系型数据的应用最好还是采用Java等语言开发。
+            </aside>
+          </section>
+          <section>
+            <h2>Web App</h2>
+            <a href="#">
+              <img width="500" height="500" src="node/wp.png" alt="Unicorn">
+            </a>
+            <p/>
+          </section>
+          <section>
+            <h2>Isomorphic JavaScript</h2>
+            <a href="#">
+              <img width="500" height="500" src="node/oj.png" alt="Unicorn">
+            </a>
+            <p/>
+          </section>
+        </section>
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        <section>
+          <section>
+            <h2>Full stack JS Web Dev</h2>
+            <a href="#">
+              <img width="600" height="550" src="node/fullstack.png" alt="Unicorn">
+            </a>
+            <p/>
+            <ul>
+              <li class="fragment">MEAN(Mongo + Express + Angular + Node)</li>
+            </ul>
+            <aside class="notes">
+              Mongo + express + angular + node.js
+              grunt + mocha + jscover
+              better for object db or restful server proxy
+            </aside>
+          </section>
+        </section>
 
-		</script>
+        <section>
+          <section>
+            <h2>Who use Node</h2>
+            <ul>
+              <li>Linkedin</li>
+              <li>Microsoft</li>
+              <li>Groupon</li>
+              <li>Paypal</li>
+              <li>Yahoo</li>
+              <li>eHealth ;-)</li>
+              <li>Taobao</li>
+              <li>...</li>
+            </ul>
+          </section>
+        </section>
+        
+        <section>
+          <section>
+            <h2>Thank you</h2>
+            <blockquote>I hear and I forget. I see and I remember. I do and I understand.</blockquote>
+            <blockquote>不闻不若闻之，闻之不若见之，见之不若知之，知之不若行之；学至于行之而止矣。- 荀子《儒效篇》</blockquote>
+            <aside class="notes">
+              实践是最好的学习方式。按照自己的思路，查阅node的api，实现自己的设想。
+              因为node更加底层，所以可以让我们学习到更多系统底层的东西
+            </aside>
+          </section>
+        </section>
+        
+      </div>
 
-	</body>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'socket.io/socket.io.js', async: true },
+          { src: 'plugin/notes-server/client.js', async: true }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+      Reveal.addEventListener('ready', function(){
+        var jsRuns = document.querySelectorAll('[jsrun]');
+        for(var i = 0; i < jsRuns.length; i++){
+          jsRuns[i].addEventListener('click', function(){
+            var jsrun = this.getAttribute('jsrun');
+            var js = document.getElementById(jsrun);
+            eval(js.innerText);
+          });
+        }
+      });
+    </script>
+
+  </body>
 </html>

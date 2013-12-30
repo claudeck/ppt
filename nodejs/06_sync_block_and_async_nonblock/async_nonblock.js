@@ -3,7 +3,6 @@ var path = require('path');
 
 fs.readdir('.', function(err, files){
   if(err) return console.log(err);
-  var processed = 0;
   files.forEach(function(file){
     fs.stat(file, function(err, stat){
       if(stat.isFile()){
